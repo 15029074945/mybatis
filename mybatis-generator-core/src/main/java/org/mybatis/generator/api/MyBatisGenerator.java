@@ -13,7 +13,10 @@
 package org.mybatis.generator.api;
 
 import static org.mybatis.generator.internal.util.ClassloaderUtility.getCustomClassloader;
+import static org.mybatis.generator.internal.util.JavaBeansUtil.getCamelCaseString;
+import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import static org.mybatis.generator.template.GeneratorMojo.addJavaController;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,6 +32,7 @@ import java.util.Set;
 import org.mybatis.generator.codegen.RootClassInfo;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.Context;
+import org.mybatis.generator.config.JavaControllerGeneratorConfiguration;
 import org.mybatis.generator.config.JavaDomainGeneratorConfiguration;
 import org.mybatis.generator.config.MergeConstants;
 import org.mybatis.generator.config.TableConfiguration;
@@ -38,6 +42,7 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import org.mybatis.generator.internal.NullProgressCallback;
 import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.internal.XmlFileMergerJaxp;
+import org.mybatis.generator.template.entity.JavaModuleEntity;
 
 /**
  * This class is the main interface to MyBatis generator. A typical execution of the tool involves these steps:
@@ -271,13 +276,8 @@ public class MyBatisGenerator {
 
         for (Context c : configuration.getContexts()) {
 
-            if (c.getJavaDomainGeneratorConfiguration() != null) {
-                JavaDomainGeneratorConfiguration jdc = c.getJavaDomainGeneratorConfiguration();
-                System.out.println(jdc.getTargetPackage()+"" +jdc.getTargetProject());
-                List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
-                for (TableConfiguration t:tableConfigurations){
-                    System.out.println(t.getDomainObjectName());
-                }
+            if (c.getJavaControllerGeneratorConfiguration() != null) {
+                addJavaController(assignmentControllerTemplateEntity(c));
             }
         }
         // now save the files
@@ -303,6 +303,28 @@ public class MyBatisGenerator {
         callback.done();
     }
 
+    private List<JavaModuleEntity> assignmentControllerTemplateEntity(Context c){
+        List<JavaModuleEntity> list = new ArrayList<JavaModuleEntity>();
+        JavaControllerGeneratorConfiguration jdc = c.getJavaControllerGeneratorConfiguration();
+        List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
+        for (TableConfiguration t:tableConfigurations){
+            String domainObjectName = this.getDomainObjectName(t);
+            JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
+            javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
+            javaModuleEntity.setTargetProject(jdc.getTargetProject());
+            javaModuleEntity.setObjectName(domainObjectName);
+            list.add(javaModuleEntity);
+        }
+        return list;
+    }
+
+    private String getDomainObjectName(TableConfiguration t) {
+        if (stringHasValue(t.getDomainObjectName())) {
+            return t.getDomainObjectName();
+        } else {
+            return getCamelCaseString(t.getTableName(), true);
+        }
+    }
     private void writeGeneratedJavaFile(GeneratedJavaFile gjf, ProgressCallback callback)
             throws InterruptedException, IOException {
         File targetFile;

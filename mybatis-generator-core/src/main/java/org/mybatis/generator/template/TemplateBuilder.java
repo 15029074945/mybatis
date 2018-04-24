@@ -25,7 +25,7 @@ public class TemplateBuilder {
     private Map<String, Template> templates = new HashMap<String, Template>();
 
     private final String[] templateFiles = new String[] {
-            "controller","service","service-impl","domain","domain-impl"
+            "controller","service","service-impl","domain","domain-impl","mdao"
     };
 
     private Configuration configuration;

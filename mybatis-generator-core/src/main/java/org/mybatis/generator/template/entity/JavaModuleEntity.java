@@ -28,4 +28,51 @@ public class JavaModuleEntity {
      */
     private String generatedTime =  new SimpleDateFormat("HH:mm").format(new Date());
 
+    public String getTargetPackage() {
+        return targetPackage;
+    }
+
+    public void setTargetPackage(String targetPackage) {
+        this.targetPackage = targetPackage;
+    }
+
+    public String getTargetProject() {
+        return targetProject;
+    }
+
+    public void setTargetProject(String targetProject) {
+        this.targetProject = targetProject;
+    }
+
+    public String getObjectName() {
+        return objectName;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
+    public String getGeneratedDate() {
+        return generatedDate;
+    }
+
+    public void setGeneratedDate(String generatedDate) {
+        this.generatedDate = generatedDate;
+    }
+
+    public String getGeneratedTime() {
+        return generatedTime;
+    }
+
+    public void setGeneratedTime(String generatedTime) {
+        this.generatedTime = generatedTime;
+    }
 }
