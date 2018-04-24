@@ -1,31 +1,42 @@
-package ${packageName};
+package ${packageName}.impl;
 
-import com.dingxuan.atrm.${moduleName}.service.IAssetsCardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.dingxuan.atom.${moduleName}.entity.${objectName};
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-
-
+import com.dingxuan.atom.core.base.AbstractService;
+import com.dingxuan.atom.core.base.PageInfo;
+import com.dingxuan.atom.${moduleName}.domain.I${objectName}DOM;
+import com.dingxuan.atom.${moduleName}.service.I${objectName}Service;
 /**
  * @Description:
  * @author: mitnick
  * @date: ${generatedDate} ${generatedTime}
  */
 @Service
-@Transactional
-public class {objectName}Service extends ${moduleName}BaseService<{objectName}> implements I{objectName}Service {
+@Transactional(rollbackFor = Exception.class)
+public class ${objectName}ServiceImpl extends AbstractService<${objectName}> implements I${objectName}Service {
 
         @Autowired
-        private I{objectName}DOM {objectName?uncap_first}DOM;
+        private I${objectName}DOM ${objectName?uncap_first}DOM;
 
         /**
          * 新增操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          */
         @Override
-        public {objectName} insert({objectName} {objectName?uncap_first}) {
-            return {objectName?uncap_first}DOM.insert(assetsCardDTO);
+        public ${objectName} insert(${objectName} ${objectName?uncap_first}) {
+            return ${objectName?uncap_first}DOM.insert(${objectName?uncap_first});
+        }
+
+        /**
+         * 更新操作
+         * @param: ${objectName?uncap_first}
+         */
+        @Override
+        public ${objectName} update(${objectName} ${objectName?uncap_first}) {
+            return ${objectName?uncap_first}DOM.update(${objectName?uncap_first});
         }
 
         /**
@@ -33,27 +44,27 @@ public class {objectName}Service extends ${moduleName}BaseService<{objectName}> 
          * @param: orderNbr
          */
         @Override
-        public {objectName} queryBean(Integer id) {
-            return {objectName?uncap_first}DOM.queryBean(id);
+        public ${objectName} queryBean(Integer id) {
+            return ${objectName?uncap_first}DOM.queryBean(id);
         }
 
         /**
          * 查询分页操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          * @param: pageInfo
          */
         @Override
-        public PageInfo queryPage({objectName} {objectName?uncap_first}, PageInfo pageInfo) {
-            return {objectName?uncap_first}DOM.queryPage({objectName?uncap_first},pageInfo);
+        public PageInfo queryPage(PageInfo pageInfo,${objectName} ${objectName?uncap_first}) {
+            return ${objectName?uncap_first}DOM.queryPage(pageInfo,${objectName?uncap_first});
         }
 
         /**
          * 查询list操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          */
         @Override
-        public List<{objectName}> queryList({objectName} {objectName?uncap_first}) {
-            return {objectName?uncap_first}DOM.queryList({objectName?uncap_first});
+        public List<${objectName}> queryList(${objectName} ${objectName?uncap_first}) {
+            return ${objectName?uncap_first}DOM.queryList(${objectName?uncap_first});
         }
 
         /**
@@ -61,16 +72,9 @@ public class {objectName}Service extends ${moduleName}BaseService<{objectName}> 
          * @param: ids
          */
         @Override
-        public Integer[] delete(Integer ... ids) {
-            return {objectName?uncap_first}DOM.delete(ids);
+        public void delete(Integer... ids) {
+             ${objectName?uncap_first}DOM.delete(ids);
         }
 
-        /**
-         * 更新操作
-         * @param: {objectName?uncap_first}
-         */
-        @Override
-        public {objectName} update({objectName} {objectName?uncap_first}) {
-            return {objectName?uncap_first}.update({objectName?uncap_first});
-        }
+
 }

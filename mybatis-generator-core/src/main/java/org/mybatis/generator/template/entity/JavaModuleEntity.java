@@ -18,6 +18,10 @@ public class JavaModuleEntity {
 
     private String moduleName;
 
+    private String packageName;
+
+    private boolean generatorEnable;
+
     /**
      * 代码生成日期
      */
@@ -27,6 +31,22 @@ public class JavaModuleEntity {
      *   代码生成时间
      */
     private String generatedTime =  new SimpleDateFormat("HH:mm").format(new Date());
+
+    public boolean isGeneratorEnable() {
+        return generatorEnable;
+    }
+
+    public void setGeneratorEnable(boolean generatorEnable) {
+        this.generatorEnable = generatorEnable;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
 
     public String getTargetPackage() {
         return targetPackage;

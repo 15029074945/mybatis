@@ -49,6 +49,7 @@ import org.mybatis.generator.config.JDBCConnectionConfiguration;
 import org.mybatis.generator.config.JavaClientGeneratorConfiguration;
 import org.mybatis.generator.config.JavaControllerGeneratorConfiguration;
 import org.mybatis.generator.config.JavaDomainGeneratorConfiguration;
+import org.mybatis.generator.config.JavaMDaoGeneratorConfiguration;
 import org.mybatis.generator.config.JavaModelGeneratorConfiguration;
 import org.mybatis.generator.config.JavaServiceGeneratorConfiguration;
 import org.mybatis.generator.config.JavaTypeResolverConfiguration;
@@ -208,8 +209,36 @@ public class MyBatisGeneratorConfigurationParser {
                 parseJavaControllerGenerator(context, childNode);
             } else if ("javaServiceGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaServiceGenerator(context, childNode);
+            } else if ("javaMDaoGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaMDaoGenerator(context, childNode);
             } else if ("table".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseTable(context, childNode);
+            }
+        }
+    }
+
+    private void parseJavaMDaoGenerator(Context context, Node childNode) {
+        JavaMDaoGeneratorConfiguration javaMDaoGeneratorConfiguration = new JavaMDaoGeneratorConfiguration();
+        context.setJavaMDaoGeneratorConfiguration(javaMDaoGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(childNode);
+        String type = attributes.getProperty("type");
+        String domainTargetPackage = attributes.getProperty("targetPackage");
+        String domainTargetProject = attributes.getProperty("targetProject");
+        String moduleName = attributes.getProperty("moduleName");
+
+        javaMDaoGeneratorConfiguration.setTargetPackage(domainTargetPackage);
+        javaMDaoGeneratorConfiguration.setTargetProject(domainTargetProject);
+        javaMDaoGeneratorConfiguration.setModuleName(moduleName);
+        NodeList nodeList = childNode.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+
+            if (node.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+            if ("property".equals(node.getNodeName())) {
+                parseProperty(javaMDaoGeneratorConfiguration, node);
             }
         }
     }
@@ -223,9 +252,11 @@ public class MyBatisGeneratorConfigurationParser {
         String type = attributes.getProperty("type");
         String domainTargetPackage = attributes.getProperty("targetPackage");
         String domainTargetProject = attributes.getProperty("targetProject");
+        String moduleName = attributes.getProperty("moduleName");
 
         javaServiceGeneratorConfiguration.setTargetPackage(domainTargetPackage);
         javaServiceGeneratorConfiguration.setTargetProject(domainTargetProject);
+        javaServiceGeneratorConfiguration.setModuleName(moduleName);
         NodeList nodeList = childNode.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
@@ -248,9 +279,11 @@ public class MyBatisGeneratorConfigurationParser {
         String type = attributes.getProperty("type");
         String domainTargetPackage = attributes.getProperty("targetPackage");
         String domainTargetProject = attributes.getProperty("targetProject");
+        String moduleName = attributes.getProperty("moduleName");
 
         javaControllerGeneratorConfiguration.setTargetPackage(domainTargetPackage);
         javaControllerGeneratorConfiguration.setTargetProject(domainTargetProject);
+        javaControllerGeneratorConfiguration.setModuleName(moduleName);
         NodeList nodeList = childNode.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
@@ -273,9 +306,11 @@ public class MyBatisGeneratorConfigurationParser {
         String type = attributes.getProperty("type");
         String domainTargetPackage = attributes.getProperty("targetPackage");
         String domainTargetProject = attributes.getProperty("targetProject");
+        String moduleName = attributes.getProperty("moduleName");
 
         javaDomainGeneratorConfiguration.setTargetPackage(domainTargetPackage);
         javaDomainGeneratorConfiguration.setTargetProject(domainTargetProject);
+        javaDomainGeneratorConfiguration.setModuleName(moduleName);
         NodeList nodeList = childNode.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
@@ -442,6 +477,11 @@ public class MyBatisGeneratorConfigurationParser {
         String sqlProviderName = attributes.getProperty("sqlProviderName"); //$NON-NLS-1$
         if (stringHasValue(sqlProviderName)) {
             tc.setSqlProviderName(sqlProviderName);
+        }
+        String generatorEnabled = attributes.getProperty("generatorEnabled"); //$NON-NLS-1$
+        if (stringHasValue(generatorEnabled)) {
+            tc.setGeneratorEnabled(
+                    isTrue(generatorEnabled));
         }
 
         NodeList nodeList = node.getChildNodes();

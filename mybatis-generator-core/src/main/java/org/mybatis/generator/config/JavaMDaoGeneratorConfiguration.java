@@ -13,17 +13,18 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
  * @author: mitnick
  * @date: 2018-04-24 下午1:03
  */
-public class JavaControllerGeneratorConfiguration extends PropertyHolder {
+public class JavaMDaoGeneratorConfiguration extends PropertyHolder {
 
     private String targetPackage;
 
     private String targetProject;
 
     private String moduleName;
+
     /**
      *
      */
-    public JavaControllerGeneratorConfiguration() {
+    public JavaMDaoGeneratorConfiguration() {
         super();
     }
 
@@ -52,7 +53,7 @@ public class JavaControllerGeneratorConfiguration extends PropertyHolder {
     }
 
     public XmlElement toXmlElement() {
-        XmlElement answer = new XmlElement("javaControllerGenerator"); //$NON-NLS-1$
+        XmlElement answer = new XmlElement("javaMDaoGenerator"); //$NON-NLS-1$
 
         if (targetPackage != null) {
             answer.addAttribute(new Attribute("targetPackage", targetPackage)); //$NON-NLS-1$
@@ -78,7 +79,7 @@ public class JavaControllerGeneratorConfiguration extends PropertyHolder {
 
         if (!stringHasValue(targetPackage)) {
             errors.add(getString("ValidationError.12", //$NON-NLS-1$
-                    "javaControllerGenerator", contextId)); //$NON-NLS-1$
+                    "javaMDaoGenerator", contextId)); //$NON-NLS-1$
         }
     }
 }

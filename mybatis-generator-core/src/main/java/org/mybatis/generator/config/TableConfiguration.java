@@ -54,6 +54,8 @@ public class TableConfiguration extends PropertyHolder {
 
     private boolean updateByExampleStatementEnabled;
 
+    private boolean generatorEnabled;
+
     private List<ColumnOverride> columnOverrides;
 
     private Map<IgnoredColumn, Boolean> ignoredColumns;
@@ -109,6 +111,7 @@ public class TableConfiguration extends PropertyHolder {
         deleteByExampleStatementEnabled = true;
         countByExampleStatementEnabled = true;
         updateByExampleStatementEnabled = true;
+        generatorEnabled = false;
     }
 
     public boolean isDeleteByPrimaryKeyStatementEnabled() {
@@ -135,6 +138,14 @@ public class TableConfiguration extends PropertyHolder {
     public void setSelectByPrimaryKeyStatementEnabled(
             boolean selectByPrimaryKeyStatementEnabled) {
         this.selectByPrimaryKeyStatementEnabled = selectByPrimaryKeyStatementEnabled;
+    }
+
+    public boolean isGeneratorEnabled() {
+        return generatorEnabled;
+    }
+
+    public void setGeneratorEnabled(boolean generatorEnabled) {
+        this.generatorEnabled = generatorEnabled;
     }
 
     public boolean isUpdateByPrimaryKeyStatementEnabled() {

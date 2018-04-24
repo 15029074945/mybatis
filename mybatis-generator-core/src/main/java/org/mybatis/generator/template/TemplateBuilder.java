@@ -7,6 +7,7 @@ import freemarker.template.TemplateException;
 
 
 import org.apache.commons.io.FileUtils;
+import org.mybatis.generator.template.entity.JavaModuleEntity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,10 +44,9 @@ public class TemplateBuilder {
             templates.put(templateFile, template);
 
         }
-        System.out.println(templates);
     }
 
-    public void build(String templateFile, Map data, File file) throws IOException, TemplateException {
+    public void build(String templateFile, JavaModuleEntity data, File file) throws IOException, TemplateException {
         Template template = templates.get(templateFile);
         if(template != null) {
             FileOutputStream fileOutputStream = null;

@@ -19,6 +19,7 @@ public class JavaServiceGeneratorConfiguration extends PropertyHolder {
 
     private String targetProject;
 
+    private String moduleName;
     /**
      *
      */
@@ -42,8 +43,16 @@ public class JavaServiceGeneratorConfiguration extends PropertyHolder {
         this.targetPackage = targetPackage;
     }
 
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
     public XmlElement toXmlElement() {
-        XmlElement answer = new XmlElement("javaModelGenerator"); //$NON-NLS-1$
+        XmlElement answer = new XmlElement("javaServiceGenerator"); //$NON-NLS-1$
 
         if (targetPackage != null) {
             answer.addAttribute(new Attribute("targetPackage", targetPackage)); //$NON-NLS-1$
@@ -51,6 +60,10 @@ public class JavaServiceGeneratorConfiguration extends PropertyHolder {
 
         if (targetProject != null) {
             answer.addAttribute(new Attribute("targetProject", targetProject)); //$NON-NLS-1$
+        }
+
+        if (moduleName != null) {
+            answer.addAttribute(new Attribute("moduleName", moduleName)); //$NON-NLS-1$
         }
 
         addPropertyXmlElements(answer);
@@ -65,7 +78,7 @@ public class JavaServiceGeneratorConfiguration extends PropertyHolder {
 
         if (!stringHasValue(targetPackage)) {
             errors.add(getString("ValidationError.12", //$NON-NLS-1$
-                    "JavaModelGenerator", contextId)); //$NON-NLS-1$
+                    "javaServiceGenerator", contextId)); //$NON-NLS-1$
         }
     }
 }

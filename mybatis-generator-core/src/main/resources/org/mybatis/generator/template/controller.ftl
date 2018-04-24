@@ -5,7 +5,7 @@ import com.dingxuan.atom.core.base.PageInfo;
 import com.dingxuan.atom.core.base.ResultBean;
 import com.dingxuan.atom.${moduleName}.entity.${objectName};
 import com.dingxuan.atom.system.entity.SysUser;
-import com.dingxuan.atom.system.service.ISysUserService;
+import com.dingxuan.atom.${moduleName}.service.I${objectName}Service;
 import com.dingxuan.atom.system.utils.annotation.CurrentUser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -110,14 +110,14 @@ public class ${objectName}Resource extends BaseResource {
     @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResultBean> queryById(@CurrentUser SysUser sysUser,
+    public ResponseEntity<ResultBean> queryBean(@CurrentUser SysUser sysUser,
                                                 @RequestParam(value = "id") Integer id) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
         logger.debug("管理员【{}】根据主键查询数据",sysUser.getName());
         ${objectName} ${objectName?uncap_first} = null;
         try {
-            ${objectName?uncap_first} = ${objectName?uncap_first}Service.queryById(id);
+            ${objectName?uncap_first} = ${objectName?uncap_first}Service.queryBean(id);
             resultBean.setData(${objectName?uncap_first});
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);
         } catch (Exception e) {

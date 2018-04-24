@@ -51,7 +51,7 @@
   tables.
 -->
 <!ELEMENT context (property*, plugin*, commentGenerator?, (connectionFactory | jdbcConnection), javaTypeResolver?,
-                         javaModelGenerator,javaDomainGenerator?,javaControllerGenerator?,javaServiceGenerator?, sqlMapGenerator?, javaClientGenerator?, table+)>
+                         javaModelGenerator,javaControllerGenerator?,javaServiceGenerator?,javaDomainGenerator?,javaMDaoGenerator?, sqlMapGenerator?, javaClientGenerator?, table+)>
 <!ATTLIST context id ID #REQUIRED
   defaultModelType CDATA #IMPLIED
   targetRuntime CDATA #IMPLIED
@@ -116,19 +116,26 @@
 <!ELEMENT javaControllerGenerator (property*)>
 <!ATTLIST javaControllerGenerator
         targetPackage CDATA #REQUIRED
-        targetProject CDATA #REQUIRED>
+        targetProject CDATA #REQUIRED
+        moduleName CDATA #IMPLIED>
 
 <!ELEMENT javaServiceGenerator (property*)>
 <!ATTLIST javaServiceGenerator
         targetPackage CDATA #REQUIRED
-        targetProject CDATA #REQUIRED>
+        targetProject CDATA #REQUIRED
+        moduleName CDATA #IMPLIED>
 
 <!ELEMENT javaDomainGenerator (property*)>
 <!ATTLIST javaDomainGenerator
         targetPackage CDATA #REQUIRED
-        targetProject CDATA #REQUIRED>
+        targetProject CDATA #REQUIRED
+        moduleName CDATA #IMPLIED>
 
-
+<!ELEMENT javaMDaoGenerator (property*)>
+<!ATTLIST javaMDaoGenerator
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED
+        moduleName CDATA #IMPLIED>
 
 <!--
   The javaTypeResolver element is used to define properties of the Java Type Resolver.
@@ -171,6 +178,7 @@
 <!ATTLIST table
   catalog CDATA #IMPLIED
   schema CDATA #IMPLIED
+  generatorEnabled CDATA #REQUIRED
   tableName CDATA #REQUIRED
   alias CDATA #IMPLIED
   domainObjectName CDATA #IMPLIED

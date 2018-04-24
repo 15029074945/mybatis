@@ -1,29 +1,40 @@
-package ${packageName};
+package ${packageName}.impl;
 
 import com.dingxuan.atom.${moduleName}.entity.${objectName};
-import com.dingxuan.atrm.${moduleName}.domain.I{objectName}DOM;
-import com.dingxuan.atom.system.entity.SysUser;
-import org.apache.shiro.SecurityUtils;
+import com.dingxuan.atom.${moduleName}.domain.I${objectName}DOM;
+import com.dingxuan.atom.core.base.AbstractDOM;
+import com.dingxuan.atom.core.base.PageInfo;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import com.dingxuan.atom.${moduleName}.dao.I${objectName}MDAO;
 /**
  * @Description:
  * @author: mitnick
  * @date: ${generatedDate} ${generatedTime}
  */
 @Component
-public class {objectName}DOM implements I{objectName}DOM{
+public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements I${objectName}DOM{
 
         @Autowired
-        private I{objectName}MDAO {objectName?uncap_first}MDAO;
+        private I${objectName}MDAO ${objectName?uncap_first}MDAO;
 
         /**
          * 新增操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          */
         @Override
-        public {objectName} insert({objectName} {objectName?uncap_first}) {
-            {objectName?uncap_first}MDAO.insert({objectName?uncap_first});
+        public ${objectName} insert(${objectName} ${objectName?uncap_first}) {
+            return null;
+        }
+
+        /**
+         * 更新操作
+         * @param: ${objectName?uncap_first}
+         */
+        @Override
+        public ${objectName} update(${objectName} ${objectName?uncap_first}) {
+            return null;
         }
 
         /**
@@ -31,55 +42,37 @@ public class {objectName}DOM implements I{objectName}DOM{
          * @param: ids
          */
         @Override
-        public Integer[] delete(Integer ... ids) {
-            SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
-            if(Objects.nonNull(ids)){
-                if(ids.length == 1){
-                {objectName?uncap_first}MDAO.delete(ids[0],sysUser.getStaffId(),dateNow());
-                }else{
-                {objectName?uncap_first}MDAO.batchDelete(ids,sysUser.getStaffId(),dateNow());
-                }
-            }
-                return ids;
+        public void delete(Integer... ids) {
+
         }
 
-        /**
-         * 更新操作
-         * @param: {objectName?uncap_first}
-         */
-        @Override
-        public {objectName} update({objectName} {objectName?uncap_first}) {
-            {objectName?uncap_first}MDAO.update({objectName?uncap_first});
-        }
 
         /**
          * 根据主键进行查询操作
-         * @param: orderNbr
+         * @param: id
          */
         @Override
-        public {objectName} queryBean(Integer id) {
+        public ${objectName} queryBean(Integer id) {
 
-            return {objectName?uncap_first}MDAO.queryBean(id);
+            return null;
         }
 
         /**
          * 查询list操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          */
         @Override
-        public List<{objectName}> queryList({objectName} {objectName?uncap_first}) {
-            return {objectName?uncap_first}MDAO.queryList({objectName?uncap_first});
+        public List<${objectName}> queryList(${objectName} ${objectName?uncap_first}) {
+            return null;
         }
 
         /**
          * 查询分页操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          * @param: pageInfo
          */
         @Override
-        public PageInfo queryPage({objectName} {objectName?uncap_first}, PageInfo pageInfo){
-            pageInfo.setRows({objectName?uncap_first}MDAO.queryCardPage({objectName?uncap_first},pageInfo));
-            pageInfo.setTotal({objectName?uncap_first}MDAO.queryPageTotal({objectName?uncap_first}));
-            return pageInfo;
+        public PageInfo queryPage(PageInfo pageInfo,${objectName} ${objectName?uncap_first}){
+            return null;
         }
 }

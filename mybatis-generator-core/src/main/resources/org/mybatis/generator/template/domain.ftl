@@ -1,51 +1,54 @@
 package ${packageName};
 
+import com.dingxuan.atom.core.base.IDOM;
+import com.dingxuan.atom.core.base.PageInfo;
 import com.dingxuan.atom.${moduleName}.entity.${objectName};
-import org.apache.shiro.SecurityUtils;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @Description:
  * @author: mitnick
  * @date: ${generatedDate} ${generatedTime}
  */
-public interface I{objectName}DOM extends I${moduleName}Domain<{objectName}>{
+public interface I${objectName}DOM extends IDOM<${objectName}>{
 
         /**
          * 新增操作
          * @param: {objectName?uncap_first}
          */
-        {objectName} insert({objectName} {objectName?uncap_first});
+        ${objectName} insert(${objectName} ${objectName?uncap_first});
+
+
+        /**
+         * 更新操作
+         * @param: {objectName?uncap_first}
+         */
+        ${objectName} update(${objectName} ${objectName?uncap_first});
 
 
         /**
          * 删除操作
          * @param: ids
          */
-        Integer[] delete(Integer ... ids);
+        void delete(Integer... ids);
 
-        /**
-         * 更新操作
-         * @param: {objectName?uncap_first}
-         */
-        {objectName} update({objectName} {objectName?uncap_first});
 
         /**
          * 根据主键进行查询操作
          * @param: orderNbr
          */
-        {objectName} queryBean(Integer id);
+        ${objectName} queryBean(Integer id);
 
         /**
          * 查询list操作
          * @param: {objectName?uncap_first}
          */
-        List<{objectName}> queryList({objectName} {objectName?uncap_first});
+        List<${objectName}> queryList(${objectName} ${objectName?uncap_first});
 
         /**
          * 查询分页操作
          * @param: {objectName?uncap_first}
          * @param: pageInfo
          */
-        PageInfo queryPage({objectName} {objectName?uncap_first}, PageInfo pageInfo);
+        PageInfo queryPage(PageInfo pageInfo , ${objectName} ${objectName?uncap_first});
 }

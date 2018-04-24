@@ -17,6 +17,9 @@ import static org.mybatis.generator.internal.util.JavaBeansUtil.getCamelCaseStri
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaController;
+import static org.mybatis.generator.template.GeneratorMojo.addJavaDomainInterface;
+import static org.mybatis.generator.template.GeneratorMojo.addJavaMDaoInterface;
+import static org.mybatis.generator.template.GeneratorMojo.addJavaServiceInterface;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,11 +32,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.tools.ant.util.StringUtils;
 import org.mybatis.generator.codegen.RootClassInfo;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.Context;
 import org.mybatis.generator.config.JavaControllerGeneratorConfiguration;
 import org.mybatis.generator.config.JavaDomainGeneratorConfiguration;
+import org.mybatis.generator.config.JavaMDaoGeneratorConfiguration;
+import org.mybatis.generator.config.JavaServiceGeneratorConfiguration;
 import org.mybatis.generator.config.MergeConstants;
 import org.mybatis.generator.config.TableConfiguration;
 import org.mybatis.generator.exception.InvalidConfigurationException;
@@ -276,8 +282,21 @@ public class MyBatisGenerator {
 
         for (Context c : configuration.getContexts()) {
 
+            String proClassPath = this.getClass().getResource("").getPath();
             if (c.getJavaControllerGeneratorConfiguration() != null) {
                 addJavaController(assignmentControllerTemplateEntity(c));
+            }
+
+            if (c.getJavaServiceGeneratorConfiguration() != null) {
+                addJavaServiceInterface(assignmentServiceTemplateEntity(c));
+            }
+
+            if (c.getJavaDomainGeneratorConfiguration() != null) {
+                addJavaDomainInterface(assignmentDomainTemplateEntity(c));
+            }
+
+            if (c.getJavaMDaoGeneratorConfiguration() != null) {
+                addJavaMDaoInterface(assignmentMDaoTemplateEntity(c));
             }
         }
         // now save the files
@@ -303,6 +322,69 @@ public class MyBatisGenerator {
         callback.done();
     }
 
+    private List<JavaModuleEntity> assignmentMDaoTemplateEntity(Context c) {
+        List<JavaModuleEntity> list = new ArrayList<JavaModuleEntity>();
+        JavaMDaoGeneratorConfiguration jdc = c.getJavaMDaoGeneratorConfiguration();
+        List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
+        for (TableConfiguration t:tableConfigurations){
+            String domainObjectName = this.getDomainObjectName(t);
+            JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
+            javaModuleEntity.setGeneratorEnable(t.isGeneratorEnabled());
+            javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
+            javaModuleEntity.setTargetProject(
+                    System.getProperty("user.dir")+File.separator+
+                    jdc.getTargetProject()+File.separator+
+                    jdc.getTargetPackage().replaceAll("\\.",File.separator) + File.separator);
+            javaModuleEntity.setObjectName(domainObjectName);
+            javaModuleEntity.setPackageName(jdc.getTargetPackage());
+            javaModuleEntity.setModuleName(jdc.getModuleName());
+            list.add(javaModuleEntity);
+        }
+        return list;
+    }
+
+    private List<JavaModuleEntity> assignmentDomainTemplateEntity(Context c) {
+        List<JavaModuleEntity> list = new ArrayList<JavaModuleEntity>();
+        JavaDomainGeneratorConfiguration jdc = c.getJavaDomainGeneratorConfiguration();
+        List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
+        for (TableConfiguration t:tableConfigurations){
+            String domainObjectName = this.getDomainObjectName(t);
+            JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
+            javaModuleEntity.setGeneratorEnable(t.isGeneratorEnabled());
+            javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
+            javaModuleEntity.setTargetProject(
+                    System.getProperty("user.dir")+File.separator+
+                    jdc.getTargetProject()+File.separator+
+                    jdc.getTargetPackage().replaceAll("\\.",File.separator) + File.separator);
+            javaModuleEntity.setObjectName(domainObjectName);
+            javaModuleEntity.setPackageName(jdc.getTargetPackage());
+            javaModuleEntity.setModuleName(jdc.getModuleName());
+            list.add(javaModuleEntity);
+        }
+        return list;
+    }
+
+    private List<JavaModuleEntity> assignmentServiceTemplateEntity(Context c) {
+        List<JavaModuleEntity> list = new ArrayList<JavaModuleEntity>();
+        JavaServiceGeneratorConfiguration jdc = c.getJavaServiceGeneratorConfiguration();
+        List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
+        for (TableConfiguration t:tableConfigurations){
+            String domainObjectName = this.getDomainObjectName(t);
+            JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
+            javaModuleEntity.setGeneratorEnable(t.isGeneratorEnabled());
+            javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
+            javaModuleEntity.setTargetProject(
+                    System.getProperty("user.dir")+File.separator+
+                    jdc.getTargetProject()+File.separator+
+                    jdc.getTargetPackage().replaceAll("\\.",File.separator) + File.separator);
+            javaModuleEntity.setObjectName(domainObjectName);
+            javaModuleEntity.setPackageName(jdc.getTargetPackage());
+            javaModuleEntity.setModuleName(jdc.getModuleName());
+            list.add(javaModuleEntity);
+        }
+        return list;
+    }
+
     private List<JavaModuleEntity> assignmentControllerTemplateEntity(Context c){
         List<JavaModuleEntity> list = new ArrayList<JavaModuleEntity>();
         JavaControllerGeneratorConfiguration jdc = c.getJavaControllerGeneratorConfiguration();
@@ -310,9 +392,17 @@ public class MyBatisGenerator {
         for (TableConfiguration t:tableConfigurations){
             String domainObjectName = this.getDomainObjectName(t);
             JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
+            javaModuleEntity.setGeneratorEnable(t.isGeneratorEnabled());
             javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
-            javaModuleEntity.setTargetProject(jdc.getTargetProject());
+
+            javaModuleEntity.setTargetProject(
+                    System.getProperty("user.dir")+File.separator+
+                    jdc.getTargetProject()+File.separator+
+                    jdc.getTargetPackage().replaceAll("\\.",File.separator) + File.separator);
+
             javaModuleEntity.setObjectName(domainObjectName);
+            javaModuleEntity.setPackageName(jdc.getTargetPackage());
+            javaModuleEntity.setModuleName(jdc.getModuleName());
             list.add(javaModuleEntity);
         }
         return list;

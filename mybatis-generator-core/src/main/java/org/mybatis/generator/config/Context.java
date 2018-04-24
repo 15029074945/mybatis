@@ -68,6 +68,8 @@ public class Context extends PropertyHolder {
 
     private JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration;
 
+    private JavaMDaoGeneratorConfiguration javaMDaoGeneratorConfiguration;
+
     private JavaClientGeneratorConfiguration javaClientGeneratorConfiguration;
 
     private ArrayList<TableConfiguration> tableConfigurations;
@@ -145,6 +147,10 @@ public class Context extends PropertyHolder {
         return javaServiceGeneratorConfiguration;
     }
 
+    public JavaMDaoGeneratorConfiguration getJavaMDaoGeneratorConfiguration() {
+        return javaMDaoGeneratorConfiguration;
+    }
+
     public void addPluginConfiguration(
             PluginConfiguration pluginConfiguration) {
         pluginConfigurations.add(pluginConfiguration);
@@ -196,6 +202,10 @@ public class Context extends PropertyHolder {
 
         if (javaServiceGeneratorConfiguration != null) {
             javaServiceGeneratorConfiguration.validate(errors, id);
+        }
+
+        if (javaMDaoGeneratorConfiguration != null) {
+            javaMDaoGeneratorConfiguration.validate(errors, id);
         }
 
         IntrospectedTable it = null;
@@ -271,6 +281,10 @@ public class Context extends PropertyHolder {
 
     public void setJavaServiceGeneratorConfiguration(JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration) {
         this.javaServiceGeneratorConfiguration = javaServiceGeneratorConfiguration;
+    }
+
+    public void setJavaMDaoGeneratorConfiguration(JavaMDaoGeneratorConfiguration javaMDaoGeneratorConfiguration) {
+        this.javaMDaoGeneratorConfiguration = javaMDaoGeneratorConfiguration;
     }
 
     public ModelType getDefaultModelType() {
