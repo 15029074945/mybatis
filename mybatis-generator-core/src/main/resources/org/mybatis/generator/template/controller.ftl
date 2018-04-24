@@ -27,7 +27,7 @@ import java.util.Objects;
 /**
  * @Description:
  * @author: mitnick
- * @date: 2018-04-24 下午2:37
+ * @date: ${generatedDate} ${generatedTime}
  */
 @RestController
 @RequestMapping("/api/app")
