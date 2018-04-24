@@ -1,9 +1,9 @@
-package ${package};
+package ${packageName};
 
 import com.dingxuan.atom.core.base.BaseResource;
 import com.dingxuan.atom.core.base.PageInfo;
 import com.dingxuan.atom.core.base.ResultBean;
-import com.dingxuan.atom.system.entity.${objectName};
+import com.dingxuan.atom.${moduleName}.entity.${objectName};
 import com.dingxuan.atom.system.entity.SysUser;
 import com.dingxuan.atom.system.service.ISysUserService;
 import com.dingxuan.atom.system.utils.annotation.CurrentUser;
@@ -47,8 +47,8 @@ public class ${objectName}Resource extends BaseResource {
         ResponseEntity<ResultBean> responseEntity;
         logger.debug("管理员【{}】开始插入数据",sysUser.getName());
         try {
-            sysStaff = sysUserService.insert(sysStaff);
-            resultBean.setData(sysStaff);
+            ${objectName?uncap_first} = ${objectName?uncap_first}Service.insert(${objectName?uncap_first});
+            resultBean.setData(${objectName?uncap_first});
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);
         } catch (Exception e) {
             logger.debug("管理员【{}】插入数据异常",sysUser.getName());
@@ -57,21 +57,21 @@ public class ${objectName}Resource extends BaseResource {
             resultBean.setMsg(e.getMessage());
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        logger.debug("管理员【{}】成功插入数据 {}",sysUser.getName(),sysStaff);
+        logger.debug("管理员【{}】成功插入数据 {}",sysUser.getName(),${objectName?uncap_first});
         return responseEntity;
     }
 
-    @RequestMapping(value = "/system/sysStaff",
+    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResultBean> update(@RequestBody SysStaff sysStaff,
+    public ResponseEntity<ResultBean> update(@RequestBody ${objectName} ${objectName?uncap_first},
                                              @CurrentUser SysUser sysUser) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
         logger.debug("管理员【{}】开始更新数据",sysUser.getName());
         try {
-            sysStaff = sysUserService.update(sysStaff);
-            resultBean.setData(sysStaff);
+            ${objectName?uncap_first} = ${objectName?uncap_first}Service.update(${objectName?uncap_first});
+            resultBean.setData(${objectName?uncap_first});
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);
         } catch (Exception e) {
             logger.debug("管理员【{}】更新数据异常",sysUser.getName());
@@ -80,11 +80,11 @@ public class ${objectName}Resource extends BaseResource {
             resultBean.setMsg(e.getMessage());
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        logger.debug("管理员【{}】成功更新数据 {}",sysUser.getName(),sysStaff);
+        logger.debug("管理员【{}】成功更新数据 {}",sysUser.getName(),${objectName?uncap_first});
         return responseEntity;
     }
 
-    @RequestMapping(value = "/system/sysStaff",
+    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> delete(@CurrentUser SysUser sysUser,
@@ -93,7 +93,7 @@ public class ${objectName}Resource extends BaseResource {
         ResponseEntity<ResultBean> responseEntity;
         logger.debug("管理员【{}】根据主键批量删除数据",sysUser.getName());
         try {
-            sysUserService.delete(ids);
+            ${objectName?uncap_first}Service.delete(ids);
             resultBean.setData(ids);
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);
         } catch (Exception e) {
@@ -107,7 +107,7 @@ public class ${objectName}Resource extends BaseResource {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/system/sysStaff",
+    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> queryById(@CurrentUser SysUser sysUser,
@@ -115,10 +115,10 @@ public class ${objectName}Resource extends BaseResource {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
         logger.debug("管理员【{}】根据主键查询数据",sysUser.getName());
-        SysStaff sysStaff = null;
+        ${objectName} ${objectName?uncap_first} = null;
         try {
-            sysStaff = sysUserService.queryById(id);
-            resultBean.setData(sysStaff);
+            ${objectName?uncap_first} = ${objectName?uncap_first}Service.queryById(id);
+            resultBean.setData(${objectName?uncap_first});
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);
         } catch (Exception e) {
             logger.debug("管理员【{}】根据主键查询数据异常",sysUser.getName());
@@ -131,18 +131,18 @@ public class ${objectName}Resource extends BaseResource {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/system/sysStaff",
+    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}/list",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> queryList(@CurrentUser SysUser sysUser,
-                                                @RequestBody SysStaff sysStaff) {
+                                                @RequestBody ${objectName} ${objectName?uncap_first}) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
-        List<SysStaff> sysStaffs = null;
+        List<${objectName}> ${objectName?uncap_first}s = null;
         logger.debug("管理员【{}】根据条件查询数据",sysUser.getName());
         try {
-            sysStaffs = sysUserService.queryList(sysStaff);
-            resultBean.setData(sysStaffs);
+            ${objectName?uncap_first}s = ${objectName?uncap_first}Service.queryList(${objectName?uncap_first});
+            resultBean.setData(${objectName?uncap_first}s);
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);
         } catch (Exception e) {
             logger.debug("管理员【{}】根据条件查询数据异常",sysUser.getName());
@@ -151,15 +151,15 @@ public class ${objectName}Resource extends BaseResource {
             resultBean.setMsg(e.getMessage());
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        logger.debug("管理员【{}】根据条件查询成功 {}",sysUser.getName(),sysStaffs);
+        logger.debug("管理员【{}】根据条件查询成功 {}",sysUser.getName(),${objectName?uncap_first}s);
         return responseEntity;
     }
 
-    @RequestMapping(value = "/system/sysStaff",
+    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}/page",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> queryPage(@CurrentUser SysUser sysUser,
-                                                @RequestBody SysStaff sysStaff,
+                                                @RequestBody ${objectName} ${objectName?uncap_first},
                                                 @RequestParam(value = "page") Integer page,
                                                 @RequestParam(value = "rp") Integer rp) {
         // page 表示第几页，rp 表示每页显示的记录数
@@ -171,7 +171,7 @@ public class ${objectName}Resource extends BaseResource {
         try {
             pageInfo.setPage(page);
             pageInfo.setRp(rp);
-            pageInfo = sysUserService.queryPage(pageInfo,sysStaff);
+            pageInfo = ${objectName?uncap_first}Service.queryPage(pageInfo,${objectName?uncap_first});
             resultBean.setData(pageInfo);
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);
         } catch (Exception e) {
