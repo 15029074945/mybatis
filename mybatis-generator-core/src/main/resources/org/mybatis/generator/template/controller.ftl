@@ -33,7 +33,7 @@ import java.util.Objects;
 @RequestMapping("/api/app")
 public class ${objectName}Resource extends BaseResource {
 
-    private static Logger logger = LoggerFactory.getLogger(SysStaffResource.class);
+    private static Logger logger = LoggerFactory.getLogger(${objectName}Resource.class);
 
     @Autowired
     private I${objectName}Service ${objectName?uncap_first}Service;
@@ -127,7 +127,7 @@ public class ${objectName}Resource extends BaseResource {
             resultBean.setMsg(e.getMessage());
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        logger.debug("管理员【{}】根据主键查询数据成功 {}",sysUser.getName(),sysStaff);
+        logger.debug("管理员【{}】根据主键查询数据成功 {}",sysUser.getName(),${objectName?uncap_first});
         return responseEntity;
     }
 
