@@ -47,8 +47,10 @@ import org.mybatis.generator.config.IgnoredColumnException;
 import org.mybatis.generator.config.IgnoredColumnPattern;
 import org.mybatis.generator.config.JDBCConnectionConfiguration;
 import org.mybatis.generator.config.JavaClientGeneratorConfiguration;
+import org.mybatis.generator.config.JavaControllerGeneratorConfiguration;
 import org.mybatis.generator.config.JavaDomainGeneratorConfiguration;
 import org.mybatis.generator.config.JavaModelGeneratorConfiguration;
+import org.mybatis.generator.config.JavaServiceGeneratorConfiguration;
 import org.mybatis.generator.config.JavaTypeResolverConfiguration;
 import org.mybatis.generator.config.ModelType;
 import org.mybatis.generator.config.PluginConfiguration;
@@ -202,8 +204,62 @@ public class MyBatisGeneratorConfigurationParser {
                 parseJavaClientGenerator(context, childNode);
             } else if ("javaDomainGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaDomainGenerator(context, childNode);
+            } else if ("javaControllerGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaControllerGenerator(context, childNode);
+            } else if ("javaServiceGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaServiceGenerator(context, childNode);
             } else if ("table".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseTable(context, childNode);
+            }
+        }
+    }
+
+    private void parseJavaServiceGenerator(Context context, Node childNode) {
+
+        JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration = new JavaServiceGeneratorConfiguration();
+        context.setJavaServiceGeneratorConfiguration(javaServiceGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(childNode);
+        String type = attributes.getProperty("type");
+        String domainTargetPackage = attributes.getProperty("targetPackage");
+        String domainTargetProject = attributes.getProperty("targetProject");
+
+        javaServiceGeneratorConfiguration.setTargetPackage(domainTargetPackage);
+        javaServiceGeneratorConfiguration.setTargetProject(domainTargetProject);
+        NodeList nodeList = childNode.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+
+            if (node.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+            if ("property".equals(node.getNodeName())) {
+                parseProperty(javaServiceGeneratorConfiguration, node);
+            }
+        }
+    }
+
+    private void parseJavaControllerGenerator(Context context, Node childNode) {
+
+        JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration = new JavaControllerGeneratorConfiguration();
+        context.setJavaControllerGeneratorConfiguration(javaControllerGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(childNode);
+        String type = attributes.getProperty("type");
+        String domainTargetPackage = attributes.getProperty("targetPackage");
+        String domainTargetProject = attributes.getProperty("targetProject");
+
+        javaControllerGeneratorConfiguration.setTargetPackage(domainTargetPackage);
+        javaControllerGeneratorConfiguration.setTargetProject(domainTargetProject);
+        NodeList nodeList = childNode.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+
+            if (node.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+            if ("property".equals(node.getNodeName())) {
+                parseProperty(javaControllerGeneratorConfiguration, node);
             }
         }
     }
@@ -817,16 +873,14 @@ public class MyBatisGeneratorConfigurationParser {
     }
 
     /**
-     * This method resolve a property from one of the three sources: system properties,
-     * properties loaded from the &lt;properties&gt; configuration element, and
-     * "extra" properties that may be supplied by the Maven or Ant environments.
+     * This method resolve a property from one of the three sources: system properties, properties loaded from the &lt;properties&gt;
+     * configuration element, and "extra" properties that may be supplied by the Maven or Ant environments.
      *
-     * <p>If there is a name collision, system properties take precedence, followed by
-     * configuration properties, followed by extra properties.
+     * <p>If there is a name collision, system properties take precedence, followed by configuration properties, followed by extra
+     * properties.
      *
      * @param key property key
-     * @return the resolved property.  This method will return null if the property is
-     *     undefined in any of the sources.
+     * @return the resolved property.  This method will return null if the property is undefined in any of the sources.
      */
     private String resolveProperty(String key) {
         String property = null;

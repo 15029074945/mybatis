@@ -64,6 +64,10 @@ public class Context extends PropertyHolder {
 
     private JavaDomainGeneratorConfiguration javaDomainGeneratorConfiguration;
 
+    private JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration;
+
+    private JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration;
+
     private JavaClientGeneratorConfiguration javaClientGeneratorConfiguration;
 
     private ArrayList<TableConfiguration> tableConfigurations;
@@ -133,6 +137,14 @@ public class Context extends PropertyHolder {
         return sqlMapGeneratorConfiguration;
     }
 
+    public JavaControllerGeneratorConfiguration getJavaControllerGeneratorConfiguration() {
+        return javaControllerGeneratorConfiguration;
+    }
+
+    public JavaServiceGeneratorConfiguration getJavaServiceGeneratorConfiguration() {
+        return javaServiceGeneratorConfiguration;
+    }
+
     public void addPluginConfiguration(
             PluginConfiguration pluginConfiguration) {
         pluginConfigurations.add(pluginConfiguration);
@@ -176,6 +188,14 @@ public class Context extends PropertyHolder {
 
         if (javaClientGeneratorConfiguration != null) {
             javaClientGeneratorConfiguration.validate(errors, id);
+        }
+
+        if (javaControllerGeneratorConfiguration != null) {
+            javaControllerGeneratorConfiguration.validate(errors, id);
+        }
+
+        if (javaServiceGeneratorConfiguration != null) {
+            javaServiceGeneratorConfiguration.validate(errors, id);
         }
 
         IntrospectedTable it = null;
@@ -243,6 +263,14 @@ public class Context extends PropertyHolder {
     public void setSqlMapGeneratorConfiguration(
             SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration) {
         this.sqlMapGeneratorConfiguration = sqlMapGeneratorConfiguration;
+    }
+
+    public void setJavaControllerGeneratorConfiguration(JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration) {
+        this.javaControllerGeneratorConfiguration = javaControllerGeneratorConfiguration;
+    }
+
+    public void setJavaServiceGeneratorConfiguration(JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration) {
+        this.javaServiceGeneratorConfiguration = javaServiceGeneratorConfiguration;
     }
 
     public ModelType getDefaultModelType() {
