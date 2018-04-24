@@ -113,10 +113,16 @@
       <property name="enableSubPackages" value="true" />
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
-    
+    <javaDomainGenerator
+            targetPackage="com.dingxuan.atom.system.domain"
+            targetProject="src/main/java"
+    >
+
+    </javaDomainGenerator>
     <javaClientGenerator type="MIXEDMAPPER" targetPackage="ibatortest.generated.flat.java5.client"
         targetProject="target/generated-sources/mybatis-generator/mybatis3">
     </javaClientGenerator>
+
 
     <table tableName="FieldsOnly" />
     <table tableName="PKOnly" />
@@ -155,6 +161,8 @@
       <property name="enableSubPackages" value="true" />
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
+
+    <javaDomainGenerator targetPackage="" targetProject=""></javaDomainGenerator>
     
     <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="ibatortest.generated.flat.java5.client"
         targetProject="target/generated-sources/mybatis-generator/mybatis3">

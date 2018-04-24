@@ -1,17 +1,14 @@
 /**
- *    Copyright ${license.git.copyrightYears} the original author or authors.
+ * Copyright ${license.git.copyrightYears} the original author or authors.
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may
+ * obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
  */
 /*
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,6 +47,7 @@ import org.mybatis.generator.config.IgnoredColumnException;
 import org.mybatis.generator.config.IgnoredColumnPattern;
 import org.mybatis.generator.config.JDBCConnectionConfiguration;
 import org.mybatis.generator.config.JavaClientGeneratorConfiguration;
+import org.mybatis.generator.config.JavaDomainGeneratorConfiguration;
 import org.mybatis.generator.config.JavaModelGeneratorConfiguration;
 import org.mybatis.generator.config.JavaTypeResolverConfiguration;
 import org.mybatis.generator.config.ModelType;
@@ -66,7 +64,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * This class parses configuration files into the new Configuration API.
- * 
+ *
  * @author Jeff Butler
  */
 public class MyBatisGeneratorConfigurationParser {
@@ -202,11 +200,39 @@ public class MyBatisGeneratorConfigurationParser {
                 parseSqlMapGenerator(context, childNode);
             } else if ("javaClientGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaClientGenerator(context, childNode);
+            } else if ("javaDomainGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaDomainGenerator(context, childNode);
             } else if ("table".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseTable(context, childNode);
             }
         }
     }
+
+    private void parseJavaDomainGenerator(Context context, Node childNode) {
+
+        JavaDomainGeneratorConfiguration javaDomainGeneratorConfiguration = new JavaDomainGeneratorConfiguration();
+        context.setJavaDomainGeneratorConfiguration(javaDomainGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(childNode);
+        String type = attributes.getProperty("type");
+        String domainTargetPackage = attributes.getProperty("targetPackage");
+        String domainTargetProject = attributes.getProperty("targetProject");
+
+        javaDomainGeneratorConfiguration.setTargetPackage(domainTargetPackage);
+        javaDomainGeneratorConfiguration.setTargetProject(domainTargetProject);
+        NodeList nodeList = childNode.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+
+            if (node.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+            if ("property".equals(node.getNodeName())) {
+                parseProperty(javaDomainGeneratorConfiguration, node);
+            }
+        }
+    }
+
 
     protected void parseSqlMapGenerator(Context context, Node node) {
         SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration = new SqlMapGeneratorConfiguration();
@@ -794,10 +820,10 @@ public class MyBatisGeneratorConfigurationParser {
      * This method resolve a property from one of the three sources: system properties,
      * properties loaded from the &lt;properties&gt; configuration element, and
      * "extra" properties that may be supplied by the Maven or Ant environments.
-     * 
+     *
      * <p>If there is a name collision, system properties take precedence, followed by
      * configuration properties, followed by extra properties.
-     * 
+     *
      * @param key property key
      * @return the resolved property.  This method will return null if the property is
      *     undefined in any of the sources.

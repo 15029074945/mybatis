@@ -46,6 +46,8 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
     
     protected List<AbstractJavaGenerator> javaModelGenerators;
 
+    protected List<AbstractJavaGenerator> javaDomainGenerators;
+
     protected List<AbstractJavaGenerator> clientGenerators;
 
     protected AbstractXmlGenerator xmlMapperGenerator;
@@ -53,6 +55,7 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
     public IntrospectedTableMyBatis3Impl() {
         super(TargetRuntime.MYBATIS3);
         javaModelGenerators = new ArrayList<AbstractJavaGenerator>();
+        javaDomainGenerators = new ArrayList<AbstractJavaGenerator>();
         clientGenerators = new ArrayList<AbstractJavaGenerator>();
     }
 

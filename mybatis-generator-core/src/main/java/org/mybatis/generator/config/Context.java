@@ -62,6 +62,8 @@ public class Context extends PropertyHolder {
 
     private JavaModelGeneratorConfiguration javaModelGeneratorConfiguration;
 
+    private JavaDomainGeneratorConfiguration javaDomainGeneratorConfiguration;
+
     private JavaClientGeneratorConfiguration javaClientGeneratorConfiguration;
 
     private ArrayList<TableConfiguration> tableConfigurations;
@@ -119,6 +121,10 @@ public class Context extends PropertyHolder {
         return javaModelGeneratorConfiguration;
     }
 
+    public JavaDomainGeneratorConfiguration getJavaDomainGeneratorConfiguration() {
+        return javaDomainGeneratorConfiguration;
+    }
+
     public JavaTypeResolverConfiguration getJavaTypeResolverConfiguration() {
         return javaTypeResolverConfiguration;
     }
@@ -160,6 +166,12 @@ public class Context extends PropertyHolder {
             errors.add(getString("ValidationError.8", id)); //$NON-NLS-1$
         } else {
             javaModelGeneratorConfiguration.validate(errors, id);
+        }
+
+        if (javaDomainGeneratorConfiguration == null) {
+            errors.add(getString("ValidationError.8", id)); //$NON-NLS-1$
+        } else {
+            javaDomainGeneratorConfiguration.validate(errors, id);
         }
 
         if (javaClientGeneratorConfiguration != null) {
@@ -212,6 +224,10 @@ public class Context extends PropertyHolder {
     public void setJavaModelGeneratorConfiguration(
             JavaModelGeneratorConfiguration javaModelGeneratorConfiguration) {
         this.javaModelGeneratorConfiguration = javaModelGeneratorConfiguration;
+    }
+
+    public void setJavaDomainGeneratorConfiguration(JavaDomainGeneratorConfiguration javaDomainGeneratorConfiguration) {
+        this.javaDomainGeneratorConfiguration = javaDomainGeneratorConfiguration;
     }
 
     public void setJavaTypeResolverConfiguration(
@@ -284,6 +300,11 @@ public class Context extends PropertyHolder {
 
         if (javaModelGeneratorConfiguration != null) {
             xmlElement.addElement(javaModelGeneratorConfiguration
+                    .toXmlElement());
+        }
+
+        if (javaDomainGeneratorConfiguration != null) {
+            xmlElement.addElement(javaDomainGeneratorConfiguration
                     .toXmlElement());
         }
 
