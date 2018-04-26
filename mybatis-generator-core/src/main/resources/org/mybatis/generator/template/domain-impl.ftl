@@ -25,7 +25,7 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          */
         @Override
         public ${objectName} insert(${objectName} ${objectName?uncap_first}) {
-            return null;
+            return ${objectName?uncap_first}MDAO.insert(${objectName?uncap_first});
         }
 
         /**
@@ -34,7 +34,7 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          */
         @Override
         public ${objectName} update(${objectName} ${objectName?uncap_first}) {
-            return null;
+            return ${objectName?uncap_first}MDAO.update(${objectName?uncap_first});
         }
 
         /**
@@ -43,7 +43,7 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          */
         @Override
         public void delete(Integer... ids) {
-
+            ${objectName?uncap_first}MDAO.delete(ids);
         }
 
 
@@ -54,7 +54,7 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
         @Override
         public ${objectName} queryBean(Integer id) {
 
-            return null;
+            return ${objectName?uncap_first}MDAO.queryBean(id);
         }
 
         /**
@@ -63,7 +63,11 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          */
         @Override
         public List<${objectName}> queryList(${objectName} ${objectName?uncap_first}) {
-            return null;
+            ${objectName}Example ${objectName?uncap_first}Example = new ${objectName}Example();
+            ${objectName?uncap_first}Example.createCriteria().andIpAddrEqualTo("");
+
+            List<${objectName}> list = ${objectName?uncap_first}MDAO.selectByExamlpe(${objectName?uncap_first});
+            return list;
         }
 
         /**
