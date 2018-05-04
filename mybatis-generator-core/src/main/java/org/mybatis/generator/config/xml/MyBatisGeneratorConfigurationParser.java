@@ -71,6 +71,7 @@ import org.w3c.dom.NodeList;
  * @author Jeff Butler
  */
 public class MyBatisGeneratorConfigurationParser {
+
     private Properties extraProperties;
     private Properties configurationProperties;
 
@@ -482,6 +483,30 @@ public class MyBatisGeneratorConfigurationParser {
         if (stringHasValue(generatorEnabled)) {
             tc.setGeneratorEnabled(
                     isTrue(generatorEnabled));
+        }
+        String generatorResource = attributes.getProperty("generatorResource");//$NON-NLS-1$
+        if (stringHasValue(generatorResource)) {
+            tc.setGeneratorResource(
+                    isTrue(generatorResource)
+            );
+        }
+        String generatorService = attributes.getProperty("generatorService");//$NON-NLS-1$
+        if (stringHasValue(generatorService)) {
+            tc.setGeneratorService(
+                    isTrue(generatorService)
+            );
+        }
+        String generatorDOM = attributes.getProperty("generatorDOM");//$NON-NLS-1$
+        if (stringHasValue(generatorDOM)) {
+            tc.setGeneratorDOM(
+                    isTrue(generatorDOM)
+            );
+        }
+        String generatorMDAO = attributes.getProperty("generatorMDAO");//$NON-NLS-1$
+        if (stringHasValue(generatorMDAO)) {
+            tc.setGeneratorMDAO(
+                    isTrue(generatorMDAO)
+            );
         }
 
         NodeList nodeList = node.getChildNodes();

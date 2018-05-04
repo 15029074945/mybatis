@@ -42,6 +42,7 @@ public class ${objectName}Resource extends BaseResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> insert(@RequestBody ${objectName} ${objectName?uncap_first},
+                                             @TableName(tableName ='"'+ ${objectName?uncap_first}+'"', tableNameDesc = "")String tableName,
                                              @CurrentUser SysUser sysUser) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
@@ -65,6 +66,7 @@ public class ${objectName}Resource extends BaseResource {
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> update(@RequestBody ${objectName} ${objectName?uncap_first},
+                                             @TableName(tableName ='"'+ ${objectName?uncap_first}+'"', tableNameDesc = "")String tableName,
                                              @CurrentUser SysUser sysUser) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
@@ -88,7 +90,8 @@ public class ${objectName}Resource extends BaseResource {
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> delete(@CurrentUser SysUser sysUser,
-                                             @RequestParam(value = "ids") Integer... ids) {
+                                             @TableName(tableName ='"'+ ${objectName?uncap_first}+'"', tableNameDesc = "")String tableName,
+                                             @RequestParam(value = "ids") Long... ids) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
         logger.debug("管理员【{}】根据主键批量删除数据",sysUser.getName());
@@ -111,7 +114,7 @@ public class ${objectName}Resource extends BaseResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> queryBean(@CurrentUser SysUser sysUser,
-                                                @RequestParam(value = "id") Integer id) {
+                                                @RequestParam(value = "id") long id) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
         logger.debug("管理员【{}】根据主键查询数据",sysUser.getName());

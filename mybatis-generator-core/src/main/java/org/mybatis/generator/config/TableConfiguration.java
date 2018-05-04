@@ -56,6 +56,14 @@ public class TableConfiguration extends PropertyHolder {
 
     private boolean generatorEnabled;
 
+    private boolean generatorResource;
+
+    private boolean generatorService;
+
+    private boolean generatorDOM;
+
+    private boolean generatorMDAO;
+
     private List<ColumnOverride> columnOverrides;
 
     private Map<IgnoredColumn, Boolean> ignoredColumns;
@@ -112,6 +120,10 @@ public class TableConfiguration extends PropertyHolder {
         countByExampleStatementEnabled = true;
         updateByExampleStatementEnabled = true;
         generatorEnabled = false;
+        generatorResource = true;
+        generatorService = true;
+        generatorDOM = true;
+        generatorMDAO = true;
     }
 
     public boolean isDeleteByPrimaryKeyStatementEnabled() {
@@ -621,5 +633,37 @@ public class TableConfiguration extends PropertyHolder {
 
     public void setSqlProviderName(String sqlProviderName) {
         this.sqlProviderName = sqlProviderName;
+    }
+
+    public boolean isGeneratorResource() {
+        return generatorResource;
+    }
+
+    public void setGeneratorResource(boolean generatorResource) {
+        this.generatorResource = generatorResource;
+    }
+
+    public boolean isGeneratorService() {
+        return generatorService;
+    }
+
+    public void setGeneratorService(boolean generatorService) {
+        this.generatorService = generatorService;
+    }
+
+    public boolean isGeneratorDOM() {
+        return generatorDOM;
+    }
+
+    public void setGeneratorDOM(boolean generatorDOM) {
+        this.generatorDOM = generatorDOM;
+    }
+
+    public boolean isGeneratorMDAO() {
+        return generatorMDAO;
+    }
+
+    public void setGeneratorMDAO(boolean generatorMDAO) {
+        this.generatorMDAO = generatorMDAO;
     }
 }

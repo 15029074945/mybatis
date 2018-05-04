@@ -22,6 +22,14 @@ public class JavaModuleEntity {
 
     private boolean generatorEnable;
 
+    private boolean generatorResource;
+
+    private boolean generatorService;
+
+    private boolean generatorDOM;
+
+    private boolean generatorMDAO;
+
     /**
      * 代码生成日期
      */
@@ -94,5 +102,37 @@ public class JavaModuleEntity {
 
     public void setGeneratedTime(String generatedTime) {
         this.generatedTime = generatedTime;
+    }
+
+    public boolean isGeneratorResource() {
+        return generatorResource;
+    }
+
+    public void setGeneratorResource(boolean generatorResource) {
+        this.generatorResource = generatorResource;
+    }
+
+    public boolean isGeneratorService() {
+        return generatorService;
+    }
+
+    public void setGeneratorService(boolean generatorService) {
+        this.generatorService = generatorService;
+    }
+
+    public boolean isGeneratorDOM() {
+        return generatorDOM;
+    }
+
+    public void setGeneratorDOM(boolean generatorDOM) {
+        this.generatorDOM = generatorDOM;
+    }
+
+    public boolean isGeneratorMDAO() {
+        return generatorMDAO;
+    }
+
+    public void setGeneratorMDAO(boolean generatorMDAO) {
+        this.generatorMDAO = generatorMDAO;
     }
 }

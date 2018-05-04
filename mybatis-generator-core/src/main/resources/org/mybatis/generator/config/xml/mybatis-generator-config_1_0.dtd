@@ -179,6 +179,10 @@
   catalog CDATA #IMPLIED
   schema CDATA #IMPLIED
   generatorEnabled CDATA #REQUIRED
+  generatorResource CDATA #IMPLIED
+  generatorService CDATA #IMPLIED
+  generatorDOM CDATA #IMPLIED
+  generatorMDAO CDATA #IMPLIED
   tableName CDATA #REQUIRED
   alias CDATA #IMPLIED
   domainObjectName CDATA #IMPLIED

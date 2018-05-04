@@ -330,6 +330,7 @@ public class MyBatisGenerator {
             String domainObjectName = this.getDomainObjectName(t);
             JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
             javaModuleEntity.setGeneratorEnable(t.isGeneratorEnabled());
+            javaModuleEntity.setGeneratorDOM(t.isGeneratorDOM());
             javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
             javaModuleEntity.setTargetProject(
                     System.getProperty("user.dir")+File.separator+
@@ -351,6 +352,7 @@ public class MyBatisGenerator {
             String domainObjectName = this.getDomainObjectName(t);
             JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
             javaModuleEntity.setGeneratorEnable(t.isGeneratorEnabled());
+            javaModuleEntity.setGeneratorDOM(t.isGeneratorDOM());
             javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
             javaModuleEntity.setTargetProject(
                     System.getProperty("user.dir")+File.separator+
@@ -372,6 +374,7 @@ public class MyBatisGenerator {
             String domainObjectName = this.getDomainObjectName(t);
             JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
             javaModuleEntity.setGeneratorEnable(t.isGeneratorEnabled());
+            javaModuleEntity.setGeneratorService(t.isGeneratorService());
             javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
             javaModuleEntity.setTargetProject(
                     System.getProperty("user.dir")+File.separator+
@@ -393,6 +396,7 @@ public class MyBatisGenerator {
             String domainObjectName = this.getDomainObjectName(t);
             JavaModuleEntity javaModuleEntity = new JavaModuleEntity();
             javaModuleEntity.setGeneratorEnable(t.isGeneratorEnabled());
+            javaModuleEntity.setGeneratorResource(t.isGeneratorResource());
             javaModuleEntity.setTargetPackage(jdc.getTargetPackage());
 
             javaModuleEntity.setTargetProject(

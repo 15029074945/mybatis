@@ -148,4 +148,14 @@ public class SqlScriptRunner {
 
         return s.length() > 0 ? s : null;
     }
+
+    public static void main(String[] args) {
+        boolean flag = false;
+        for(int i = 0;i<5;i++){
+            if(i == 1){
+                flag = true;
+            }
+            System.out.println(flag);
+        }
+    }
 }

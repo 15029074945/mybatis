@@ -30,14 +30,14 @@ public interface I${objectName}DOM extends IDOM<${objectName}>{
          * 删除操作
          * @param: ids
          */
-        void delete(Integer... ids);
+        void delete(Long... ids);
 
 
         /**
          * 根据主键进行查询操作
          * @param: orderNbr
          */
-        ${objectName} queryBean(Integer id);
+        ${objectName} queryBean(Long id);
 
         /**
          * 查询list操作

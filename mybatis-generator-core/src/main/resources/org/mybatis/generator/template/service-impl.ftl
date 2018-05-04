@@ -44,7 +44,7 @@ public class ${objectName}ServiceImpl extends AbstractService<${objectName}> imp
          * @param: orderNbr
          */
         @Override
-        public ${objectName} queryBean(Integer id) {
+        public ${objectName} queryBean(Long id) {
             return ${objectName?uncap_first}DOM.queryBean(id);
         }
 
@@ -72,7 +72,7 @@ public class ${objectName}ServiceImpl extends AbstractService<${objectName}> imp
          * @param: ids
          */
         @Override
-        public void delete(Integer... ids) {
+        public void delete(Long... ids) {
              ${objectName?uncap_first}DOM.delete(ids);
         }
 

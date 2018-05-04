@@ -64,29 +64,40 @@ public class GeneratorMojo {
     private static void createTempalte(List<JavaModuleEntity> javaModuleEntities,String template) {
         loadTemplate();
         if (javaModuleEntities != null && !javaModuleEntities.isEmpty()) {
+            boolean flag = false;
             for (JavaModuleEntity javaModuleEntity : javaModuleEntities) {
                 if (javaModuleEntity.isGeneratorEnable()) {
                     String projectPath = javaModuleEntity.getTargetProject();
                     StringBuilder filePath = new StringBuilder();
                     filePath = filePath.append(projectPath).append(File.separator);
 
-                    if ("controller".equals(template)) {
+                    if ("controller".equals(template) && javaModuleEntity.isGeneratorResource()) {
+                        flag = true;
                         filePath = filePath.append(javaModuleEntity.getObjectName()).append("Resource.java");
                     } else if ("service".equals(template)) {
+                        flag = true;
                         filePath = filePath.append("I").append(javaModuleEntity.getObjectName()).append("Service.java");
                     } else if ("service-impl".equals(template)) {
+                        flag = true;
                         filePath = filePath.append("impl").append(File.separator).append(javaModuleEntity.getObjectName()).append("ServiceImpl.java");
                     }else if ("domain".equals(template)) {
+                        flag = true;
                         filePath = filePath.append("I").append(javaModuleEntity.getObjectName()).append("DOM.java");
                     }else if ("domain-impl".equals(template)) {
+                        flag = true;
                         filePath = filePath.append("impl").append(File.separator).append(javaModuleEntity.getObjectName()).append("DOMImpl.java");
                     }else if ("mdao".equals(template)) {
+                        flag = true;
                         filePath = filePath.append("I").append(javaModuleEntity.getObjectName()).append("MDAO.java");
                     }
                     File file = new File(filePath.toString());
                     System.out.println("生成代码路径： "+ filePath);
                     try {
-                        templateBuilder.build(template, javaModuleEntity, file);
+                        if(flag){
+
+                            templateBuilder.build(template, javaModuleEntity, file);
+                        }
+
                     } catch (Exception e) {
                         logger.error("生成代码失败 {} ",e.getMessage(),e);
                     }

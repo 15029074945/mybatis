@@ -34,7 +34,15 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          */
         @Override
         public ${objectName} update(${objectName} ${objectName?uncap_first}) {
-            return ${objectName?uncap_first}MDAO.update(${objectName?uncap_first});
+
+        ${objectName} entity = ${objectName?uncap_first}MDAO.selectByPrimaryKey(${objectName?uncap_first}.getId());
+
+        if(Objects.nonNull(entity){
+                ${objectName}Example ${objectName?uncap_first}Example = new ${objectName}Example();
+                ${objectName?uncap_first}Example.createCriteria().andIdEqualTo(entity.getId());
+                ${objectName?uncap_first}MDAO.updateByExampleSelective(${objectName?uncap_first},${objectName?uncap_first}Example);
+        }
+            return ${objectName?uncap_first};
         }
 
         /**
@@ -42,8 +50,16 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          * @param: ids
          */
         @Override
-        public void delete(Integer... ids) {
+        public void delete(Long... ids) {
             ${objectName?uncap_first}MDAO.delete(ids);
+            if (Objects.nonNull(ids)) {
+                for (int i = 0; i < ids.length; i++) {
+                    ${objectName} ${objectName?uncap_first} = new SysRole();
+                    ${objectName?uncap_first}.setId(ids[i]);
+                    ${objectName?uncap_first}.setStatus(Constants.INVALID);
+                    ${objectName?uncap_first}MDAO.updateByPrimaryKeySelective(${objectName?uncap_first});
+                }
+            }
         }
 
 
@@ -52,9 +68,9 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          * @param: id
          */
         @Override
-        public ${objectName} queryBean(Integer id) {
+        public ${objectName} queryBean(Long id) {
 
-            return ${objectName?uncap_first}MDAO.queryBean(id);
+            return ${objectName?uncap_first}MDAO.selectByPrimaryKey(id);
         }
 
         /**
