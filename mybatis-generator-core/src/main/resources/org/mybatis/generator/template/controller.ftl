@@ -7,7 +7,7 @@ import com.dingxuan.atom.${moduleName}.entity.${objectName};
 import com.dingxuan.atom.system.entity.SysUser;
 import com.dingxuan.atom.${moduleName}.service.I${objectName}Service;
 import com.dingxuan.atom.system.utils.annotation.CurrentUser;
-
+import com.dingxuan.atom.system.utils.annotation.TableName;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class ${objectName}Resource extends BaseResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> insert(@RequestBody ${objectName} ${objectName?uncap_first},
-                                             @TableName(tableName ='"'+ ${objectName?uncap_first}+'"', tableNameDesc = "")String tableName,
+                                             @TableName(tableName ="${objectName?uncap_first}", tableNameDesc = "")String tableName,
                                              @CurrentUser SysUser sysUser) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
