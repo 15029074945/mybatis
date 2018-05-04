@@ -64,8 +64,10 @@ public class GeneratorMojo {
     private static void createTempalte(List<JavaModuleEntity> javaModuleEntities,String template) {
         loadTemplate();
         if (javaModuleEntities != null && !javaModuleEntities.isEmpty()) {
-            boolean flag = false;
+
+            boolean flag;
             for (JavaModuleEntity javaModuleEntity : javaModuleEntities) {
+                flag = false;
                 if (javaModuleEntity.isGeneratorEnable()) {
                     String projectPath = javaModuleEntity.getTargetProject();
                     StringBuilder filePath = new StringBuilder();
