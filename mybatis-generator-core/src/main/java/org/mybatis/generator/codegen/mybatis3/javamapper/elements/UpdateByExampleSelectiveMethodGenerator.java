@@ -57,6 +57,9 @@ public class UpdateByExampleSelectiveMethodGenerator extends
         importedTypes.add(new FullyQualifiedJavaType(
                 "org.apache.ibatis.annotations.Param")); //$NON-NLS-1$
 
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine(" * 更新")  ;
+        method.addJavaDocLine(" */");
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 

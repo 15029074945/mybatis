@@ -18,7 +18,9 @@ package org.mybatis.generator.codegen.mybatis3.javamapper;
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.generator.api.CommentGenerator;
@@ -72,6 +74,15 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         interfaze.setVisibility(JavaVisibility.PUBLIC);
         interfaze.addAnnotation("@Repository");
         interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
+
+
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        interfaze.addJavaDocLine("/**");
+        interfaze.addJavaDocLine(" * @description: " + (introspectedTable.getRemarks()==null ? "" : introspectedTable.getRemarks()) +" dao接口");
+        interfaze.addJavaDocLine(" * @author: jack");
+        interfaze.addJavaDocLine(" * @date:" + format.format(new Date()));
+        interfaze.addJavaDocLine(" */");
+        interfaze.addJavaDocLine("");
         commentGenerator.addJavaFileComment(interfaze);
 
         String rootInterface = introspectedTable

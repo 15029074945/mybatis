@@ -14,14 +14,14 @@ public interface I${objectName}DOM extends IDOM<${objectName}>{
 
         /**
          * 新增操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          */
         ${objectName} insert(${objectName} ${objectName?uncap_first});
 
 
         /**
          * 更新操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          */
         ${objectName} update(${objectName} ${objectName?uncap_first});
 
@@ -35,19 +35,19 @@ public interface I${objectName}DOM extends IDOM<${objectName}>{
 
         /**
          * 根据主键进行查询操作
-         * @param: orderNbr
+         * @param: id
          */
         ${objectName} queryBean(Long id);
 
         /**
          * 查询list操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          */
         List<${objectName}> queryList(${objectName} ${objectName?uncap_first});
 
         /**
          * 查询分页操作
-         * @param: {objectName?uncap_first}
+         * @param: ${objectName?uncap_first}
          * @param: pageInfo
          */
         PageInfo queryPage(PageInfo pageInfo , ${objectName} ${objectName?uncap_first});

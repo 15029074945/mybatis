@@ -51,6 +51,9 @@ public class InsertSelectiveMethodGenerator extends
         importedTypes.add(parameterType);
         method.addParameter(new Parameter(parameterType, "record")); //$NON-NLS-1$
 
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine(" * 根据条件插入")  ;
+        method.addJavaDocLine(" */");
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 

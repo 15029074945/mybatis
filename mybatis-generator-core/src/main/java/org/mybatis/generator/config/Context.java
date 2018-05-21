@@ -454,7 +454,7 @@ public class Context extends PropertyHolder {
     // 4. generateFiles()
     //
 
-    private List<IntrospectedTable> introspectedTables;
+    public List<IntrospectedTable> introspectedTables;
 
     public int getIntrospectionSteps() {
         int steps = 0;
@@ -594,7 +594,7 @@ public class Context extends PropertyHolder {
                 .contextGenerateAdditionalXmlFiles());
     }
 
-    private Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         ConnectionFactory connectionFactory;
         if (jdbcConnectionConfiguration != null) {
             connectionFactory = new JDBCConnectionFactory(jdbcConnectionConfiguration);

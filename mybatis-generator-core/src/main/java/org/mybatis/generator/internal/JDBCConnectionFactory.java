@@ -77,6 +77,10 @@ public class JDBCConnectionFactory implements ConnectionFactory {
         if (stringHasValue(password)) {
             props.setProperty("password", password); //$NON-NLS-1$
         }
+        // 获取Oracle元数据 REMARKS信息
+        props.setProperty("remarksReporting","true");
+        // 获取MySQL元数据 REMARKS信息
+        props.setProperty("useInformationSchema","true");
 
         props.putAll(otherProperties);
 

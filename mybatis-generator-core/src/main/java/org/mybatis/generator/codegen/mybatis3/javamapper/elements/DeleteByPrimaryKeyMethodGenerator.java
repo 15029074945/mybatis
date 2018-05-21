@@ -84,6 +84,9 @@ public class DeleteByPrimaryKeyMethodGenerator extends
             }
         }
 
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine(" * 根据主键删除")  ;
+        method.addJavaDocLine(" */");
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 

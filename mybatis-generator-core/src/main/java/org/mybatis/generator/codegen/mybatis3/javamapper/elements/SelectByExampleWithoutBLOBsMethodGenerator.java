@@ -69,6 +69,9 @@ public class SelectByExampleWithoutBLOBsMethodGenerator extends
         method.setName(introspectedTable.getSelectByExampleStatementId());
         method.addParameter(new Parameter(type, "example")); //$NON-NLS-1$
 
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine(" * 查询")  ;
+        method.addJavaDocLine(" */");
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 

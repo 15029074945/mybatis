@@ -66,7 +66,7 @@ public class ${objectName}Resource extends BaseResource {
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> update(@RequestBody ${objectName} ${objectName?uncap_first},
-                                             @TableName(tableName ='"'+ ${objectName?uncap_first}+'"', tableNameDesc = "")String tableName,
+                                             @TableName(tableName ="${objectName?uncap_first}", tableNameDesc = "")String tableName,
                                              @CurrentUser SysUser sysUser) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
@@ -90,7 +90,7 @@ public class ${objectName}Resource extends BaseResource {
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> delete(@CurrentUser SysUser sysUser,
-                                             @TableName(tableName ='"'+ ${objectName?uncap_first}+'"', tableNameDesc = "")String tableName,
+                                             @TableName(tableName ="${objectName?uncap_first}", tableNameDesc = "")String tableName,
                                              @RequestParam(value = "ids") Long... ids) {
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
@@ -172,8 +172,8 @@ public class ${objectName}Resource extends BaseResource {
         PageInfo pageInfo = null;
         logger.debug("管理员【{}】根据条件分页查询数据",sysUser.getName());
         try {
-            pageInfo.setPage(page);
-            pageInfo.setRp(rp);
+            pageInfo.setPages(page);
+            pageInfo.setPageSize(rp);
             pageInfo = ${objectName?uncap_first}Service.queryPage(pageInfo,${objectName?uncap_first});
             resultBean.setData(pageInfo);
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);

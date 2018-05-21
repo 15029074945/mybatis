@@ -216,6 +216,9 @@ public class JavaBeansUtil {
         field.setVisibility(JavaVisibility.PRIVATE);
         field.setType(fqjt);
         field.setName(property);
+        if ("Date".equals(field.getType().getShortName())) {
+            field.addAnnotation("@JsonFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
+        }
         context.getCommentGenerator().addFieldComment(field,
                 introspectedTable, introspectedColumn);
 

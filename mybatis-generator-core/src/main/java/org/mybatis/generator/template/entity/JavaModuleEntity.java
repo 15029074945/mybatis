@@ -1,7 +1,11 @@
 package org.mybatis.generator.template.entity;
 
+import org.mybatis.generator.api.IntrospectedColumn;
+import org.mybatis.generator.api.dom.java.Field;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description:
@@ -30,6 +34,9 @@ public class JavaModuleEntity {
 
     private boolean generatorMDAO;
 
+    private List<Field> fields;
+
+
     /**
      * 代码生成日期
      */
@@ -39,6 +46,15 @@ public class JavaModuleEntity {
      *   代码生成时间
      */
     private String generatedTime =  new SimpleDateFormat("HH:mm").format(new Date());
+
+
+    public List<Field> getFields() {
+        return this.fields;
+    }
+
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
+    }
 
     public boolean isGeneratorEnable() {
         return generatorEnable;

@@ -1,6 +1,8 @@
 package org.mybatis.generator.template;
 
+import org.apache.tools.ant.taskdefs.Java;
 import org.apache.tools.ant.util.StringUtils;
+import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.template.entity.JavaModuleEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -71,7 +74,7 @@ public class GeneratorMojo {
                 if (javaModuleEntity.isGeneratorEnable()) {
                     String projectPath = javaModuleEntity.getTargetProject();
                     StringBuilder filePath = new StringBuilder();
-                    filePath = filePath.append(projectPath).append(File.separator);
+                    filePath = filePath.append(projectPath);
 
                     if ("controller".equals(template) && javaModuleEntity.isGeneratorResource()) {
                         flag = true;
@@ -95,7 +98,7 @@ public class GeneratorMojo {
                     File file = new File(filePath.toString());
                     System.out.println("生成代码路径： "+ filePath);
                     try {
-                        if(flag){
+                        if(flag && templateBuilder != null){
 
                             templateBuilder.build(template, javaModuleEntity, file);
                         }

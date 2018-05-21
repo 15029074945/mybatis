@@ -49,6 +49,10 @@ public class CountByExampleMethodGenerator extends
         method.setReturnType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
         method.setName(introspectedTable.getCountByExampleStatementId());
         method.addParameter(new Parameter(fqjt, "example")); //$NON-NLS-1$
+
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine(" * 总数量")  ;
+        method.addJavaDocLine(" */");
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 

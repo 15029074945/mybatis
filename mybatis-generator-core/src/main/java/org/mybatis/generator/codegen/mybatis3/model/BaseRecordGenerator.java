@@ -20,10 +20,13 @@ import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaBeansGett
 import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaBeansSetter;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.tools.ant.util.StringUtils;
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.FullyQualifiedTable;
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -39,9 +42,9 @@ import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.RootClassInfo;
 
 /**
- * 
+ *
  * @author Jeff Butler
- * 
+ *
  */
 public class BaseRecordGenerator extends AbstractJavaGenerator {
 
@@ -62,11 +65,20 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
+        String entity = introspectedTable.getTableConfiguration().getProperty("entitySuperClass");
 
-        FullyQualifiedJavaType superClass = getSuperClass();
+        FullyQualifiedJavaType superClass;
+
+        if(entity != null && !"".equals(entity)){
+            superClass = new FullyQualifiedJavaType(entity);
+        }else{
+            superClass = getSuperClass();
+        }
+
         if (superClass != null) {
-            topLevelClass.setSuperClass(superClass);
-            topLevelClass.addImportedType(superClass);
+                topLevelClass.setSuperClass(superClass);
+                topLevelClass.addImportedType(superClass);
+
         }
         commentGenerator.addModelClassComment(topLevelClass, introspectedTable);
 
@@ -116,6 +128,16 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
             }
         }
 
+        topLevelClass.addAnnotation("@JsonInclude(JsonInclude.Include.NON_EMPTY)");
+        topLevelClass.addImportedType(new FullyQualifiedJavaType("com.fasterxml.jackson.annotation.JsonFormat"));
+        topLevelClass.addImportedType(new FullyQualifiedJavaType("com.fasterxml.jackson.annotation.JsonInclude"));
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        topLevelClass.addJavaDocLine("/**");
+        topLevelClass.addJavaDocLine(" * @description: " + (introspectedTable.getRemarks()==null ? "" : introspectedTable.getRemarks()));
+        topLevelClass.addJavaDocLine(" * @author: jack");
+        topLevelClass.addJavaDocLine(" * @date:" + format.format(new Date()));
+        topLevelClass.addJavaDocLine(" */");
+        topLevelClass.addJavaDocLine("");
         List<CompilationUnit> answer = new ArrayList<CompilationUnit>();
         if (context.getPlugins().modelBaseRecordClassGenerated(
                 topLevelClass, introspectedTable)) {

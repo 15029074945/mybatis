@@ -49,6 +49,9 @@ public class DeleteByExampleMethodGenerator extends
         method.setName(introspectedTable.getDeleteByExampleStatementId());
         method.addParameter(new Parameter(type, "example")); //$NON-NLS-1$
 
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine(" * 删除")  ;
+        method.addJavaDocLine(" */");
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 

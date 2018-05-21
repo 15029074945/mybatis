@@ -58,6 +58,9 @@ public class UpdateByPrimaryKeySelectiveMethodGenerator extends
                 .getUpdateByPrimaryKeySelectiveStatementId());
         method.addParameter(new Parameter(parameterType, "record")); //$NON-NLS-1$
 
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine(" * 更新")  ;
+        method.addJavaDocLine(" */");
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 

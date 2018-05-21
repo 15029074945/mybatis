@@ -89,6 +89,9 @@ public class SelectByPrimaryKeyMethodGenerator extends
             }
         }
 
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine(" * 查询")  ;
+        method.addJavaDocLine(" */");
         addMapperAnnotations(interfaze, method);
 
         context.getCommentGenerator().addGeneralMethodComment(method,
