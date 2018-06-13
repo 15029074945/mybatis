@@ -30,7 +30,7 @@ import java.util.Objects;
  * @date: ${generatedDate} ${generatedTime}
  */
 @RestController
-@RequestMapping("/api/app")
+@RequestMapping("/api")
 public class ${objectName}Resource extends BaseResource {
 
     private static Logger logger = LoggerFactory.getLogger(${objectName}Resource.class);
