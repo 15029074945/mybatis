@@ -169,7 +169,7 @@ public class ${objectName}Resource extends BaseResource {
 
         ResultBean resultBean = new ResultBean();
         ResponseEntity<ResultBean> responseEntity;
-        PageInfo pageInfo = null;
+        PageInfo pageInfo = new PageInfo();
         logger.debug("管理员【{}】根据条件分页查询数据",sysUser.getName());
         try {
             pageInfo.setPages(page);
