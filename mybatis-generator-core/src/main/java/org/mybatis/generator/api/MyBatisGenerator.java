@@ -18,6 +18,7 @@ import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaBeansFiel
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaController;
+import static org.mybatis.generator.template.GeneratorMojo.addJavaControllerExp;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaDomainInterface;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaMDaoInterface;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaServiceInterface;
@@ -264,7 +265,9 @@ public class MyBatisGenerator {
         for (Context c : configuration.getContexts()) {
             String proClassPath = this.getClass().getResource("").getPath();
             if (c.getJavaControllerGeneratorConfiguration() != null) {
-                addJavaController(assignmentControllerTemplateEntity(c));
+                List<JavaModuleEntity> javaModuleEntities = assignmentControllerTemplateEntity(c);
+                addJavaController(javaModuleEntities);
+                addJavaControllerExp(javaModuleEntities);
             }
 
             if (c.getJavaServiceGeneratorConfiguration() != null) {

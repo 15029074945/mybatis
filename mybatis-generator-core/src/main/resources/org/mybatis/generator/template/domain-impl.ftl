@@ -31,7 +31,7 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          */
         @Override
         public ${objectName} insert(${objectName} ${objectName?uncap_first}) {
-            EntityHelper.createEntitySetName(${objectName?uncap_first});
+            createEntity(${objectName?uncap_first});
             ${objectName?uncap_first}MDAO.insert(${objectName?uncap_first});
             return ${objectName?uncap_first};
         }
@@ -44,7 +44,7 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
         public ${objectName} update(${objectName} ${objectName?uncap_first}) {
 
             ${objectName} entity = ${objectName?uncap_first}MDAO.selectByPrimaryKey(${objectName?uncap_first}.getId());
-            EntityHelper.updateEntitySetName(${objectName?uncap_first});
+            updateEntity(${objectName?uncap_first});
             if(Objects.nonNull(entity)){
                 ${objectName}Example ${objectName?uncap_first}Example = new ${objectName}Example();
                 ${objectName?uncap_first}Example.createCriteria().andIdEqualTo(entity.getId());
@@ -64,6 +64,7 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
                     ${objectName} ${objectName?uncap_first} = new ${objectName}();
                     ${objectName?uncap_first}.setId(ids[i]);
                     ${objectName?uncap_first}.setStatus(Constants.INVALID);
+                    updateEntity(${objectName?uncap_first});
                     ${objectName?uncap_first}MDAO.updateByPrimaryKeySelective(${objectName?uncap_first});
                 }
             }

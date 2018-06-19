@@ -27,6 +27,10 @@ public class GeneratorMojo {
         createTempalte(javaModuleEntities,"controller");
     }
 
+    public static void addJavaControllerExp(List<JavaModuleEntity> javaModuleEntities){
+        createTempalte(javaModuleEntities,"controllerexp");
+    }
+
     public static void addJavaServiceInterface(List<JavaModuleEntity> javaModuleEntities){
         createTempalte(javaModuleEntities,"service");
         addJavaServiceImpl(javaModuleEntities);
@@ -79,7 +83,10 @@ public class GeneratorMojo {
                     if ("controller".equals(template) && javaModuleEntity.isGeneratorResource()) {
                         flag = true;
                         filePath = filePath.append(javaModuleEntity.getObjectName()).append("Resource.java");
-                    } else if ("service".equals(template)) {
+                    } else if("controllerexp".equals(template)){
+                        flag = true;
+                        filePath = filePath.append(javaModuleEntity.getObjectName()).append("ExpResource.java");
+                    }else if ("service".equals(template)) {
                         flag = true;
                         filePath = filePath.append("I").append(javaModuleEntity.getObjectName()).append("Service.java");
                     } else if ("service-impl".equals(template)) {
