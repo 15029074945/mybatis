@@ -1,24 +1,27 @@
-package ${packageName}.impl;
+package ${packageName}.generator.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.dingxuan.atom.${moduleName}.entity.${objectName};
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import com.dingxuan.atom.core.base.AbstractService;
 import com.dingxuan.atom.core.base.PageInfo;
-import com.dingxuan.atom.${moduleName}.domain.I${objectName}DOM;
-import com.dingxuan.atom.${moduleName}.service.I${objectName}Service;
+import com.dingxuan.atom.${moduleName}.domain.generator.I${objectName}DOM;
+import com.dingxuan.atom.${moduleName}.service.generator.I${objectName}Service;
 /**
  * @Description:
  * @author: mitnick
  * @date: ${generatedDate} ${generatedTime}
  */
-@Service
+
+@Service("${objectName?uncap_first}Service")
 @Transactional(rollbackFor = Exception.class)
 public class ${objectName}ServiceImpl extends AbstractService<${objectName}> implements I${objectName}Service {
 
         @Autowired
+        @Qualifier("${objectName?uncap_first}DOM")
         private I${objectName}DOM ${objectName?uncap_first}DOM;
 
         /**
@@ -44,8 +47,8 @@ public class ${objectName}ServiceImpl extends AbstractService<${objectName}> imp
          * @param: orderNbr
          */
         @Override
-        public ${objectName} queryBean(Long id) {
-            return ${objectName?uncap_first}DOM.queryBean(id);
+        public ${objectName} queryBean(${primaryKeyType} ${primaryKey}) {
+            return ${objectName?uncap_first}DOM.queryBean(${primaryKey});
         }
 
         /**
@@ -72,7 +75,7 @@ public class ${objectName}ServiceImpl extends AbstractService<${objectName}> imp
          * @param: ids
          */
         @Override
-        public void delete(Long... ids) {
+        public void delete(${primaryKeyType}... ${primaryKey}s) {
              ${objectName?uncap_first}DOM.delete(ids);
         }
 

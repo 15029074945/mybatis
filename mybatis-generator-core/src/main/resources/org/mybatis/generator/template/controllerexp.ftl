@@ -1,21 +1,15 @@
-package ${packageName};
+package ${packageName}.expand;
 
 import com.dingxuan.atom.core.base.BaseResource;
-import com.dingxuan.atom.${moduleName}.service.I${objectName}Service;
+import com.dingxuan.atom.system.service.expand.I${objectName}ExpService;
+import com.dingxuan.atom.system.web.generator.${objectName}Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Objects;
 
 /**
  * @Description:
@@ -26,9 +20,9 @@ import java.util.Objects;
 @RequestMapping("/api")
 public class ${objectName}ExpResource extends BaseResource{
 
-    private static Logger logger=LoggerFactory.getLogger(${objectName}Resource.class);
+    private static Logger logger=LoggerFactory.getLogger(${objectName}ExpResource.class);
 
     @Autowired
-    private I${objectName}Service ${objectName?uncap_first}Service;
+    private I${objectName}ExpService ${objectName?uncap_first}ExpService;
 
 }

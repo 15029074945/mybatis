@@ -36,6 +36,14 @@ public class JavaModuleEntity {
 
     private List<Field> fields;
 
+    private String primaryKey;
+
+    private String primaryKeyType;
+
+    private String tableNameDesc;
+
+
+
 
     /**
      * 代码生成日期
@@ -47,6 +55,29 @@ public class JavaModuleEntity {
      */
     private String generatedTime =  new SimpleDateFormat("HH:mm").format(new Date());
 
+    public String getTableNameDesc() {
+        return tableNameDesc;
+    }
+
+    public void setTableNameDesc(String tableNameDesc) {
+        this.tableNameDesc = tableNameDesc;
+    }
+
+    public String getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(String primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    public String getPrimaryKeyType() {
+        return primaryKeyType;
+    }
+
+    public void setPrimaryKeyType(String primaryKeyType) {
+        this.primaryKeyType = primaryKeyType;
+    }
 
     public List<Field> getFields() {
         return this.fields;

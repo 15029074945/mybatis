@@ -72,6 +72,9 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
                 introspectedTable.getMyBatis3JavaMapperType());
         Interface interfaze = new Interface(type);
         interfaze.setVisibility(JavaVisibility.PUBLIC);
+        interfaze.addAnnotation("@Qualifier");
+        interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.beans.factory.annotation.Qualifier"));
+
         interfaze.addAnnotation("@Repository");
         interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
 

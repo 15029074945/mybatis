@@ -1,8 +1,9 @@
-package ${packageName}.impl;
+package ${packageName}.generator.impl;
 
 import com.dingxuan.atom.${moduleName}.entity.${objectName};
 import com.dingxuan.atom.${moduleName}.entity.${objectName}Example;
-import com.dingxuan.atom.${moduleName}.domain.I${objectName}DOM;
+import com.dingxuan.atom.${moduleName}.domain.generator.I${objectName}DOM;
+import org.springframework.beans.factory.annotation.Qualifier;
 import com.dingxuan.atom.core.base.AbstractDOM;
 import com.dingxuan.atom.core.base.PageInfo;
 import com.github.pagehelper.PageHelper;
@@ -10,16 +11,18 @@ import java.util.List;
 import java.util.Objects;
 import com.dingxuan.atom.core.base.Constants;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.dingxuan.atom.system.utils.web.EntityHelper;
-import com.dingxuan.atom.${moduleName}.dao.I${objectName}MDAO;
+import com.dingxuan.atom.${moduleName}.dao.mdao.I${objectName}MDAO;
 /**
  * @Description:
  * @author: mitnick
  * @date: ${generatedDate} ${generatedTime}
  */
-@Component
+
+@Component("${objectName?uncap_first}DOM")
 public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements I${objectName}DOM{
 
         @Autowired
@@ -58,11 +61,11 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          * @param: ids
          */
         @Override
-        public void delete(Long... ids) {
-            if (Objects.nonNull(ids)) {
-                for (int i = 0; i < ids.length; i++) {
+        public void delete(${primaryKeyType}... ${primaryKey}s) {
+            if (Objects.nonNull(${primaryKey}s)) {
+                for (int i = 0; i < ${primaryKey}s.length; i++) {
                     ${objectName} ${objectName?uncap_first} = new ${objectName}();
-                    ${objectName?uncap_first}.setId(ids[i]);
+                    ${objectName?uncap_first}.set${primaryKey?cap_first}(${primaryKey}s[i]);
                     ${objectName?uncap_first}.setStatus(Constants.INVALID);
                     updateEntity(${objectName?uncap_first});
                     ${objectName?uncap_first}MDAO.updateByPrimaryKeySelective(${objectName?uncap_first});
@@ -76,9 +79,9 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
          * @param: id
          */
         @Override
-        public ${objectName} queryBean(Long id) {
+        public ${objectName} queryBean(${primaryKeyType} ${primaryKey}) {
 
-            return ${objectName?uncap_first}MDAO.selectByPrimaryKey(id);
+            return ${objectName?uncap_first}MDAO.selectByPrimaryKey(${primaryKey});
         }
 
         /**

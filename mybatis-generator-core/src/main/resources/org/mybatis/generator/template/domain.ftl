@@ -1,4 +1,4 @@
-package ${packageName};
+package ${packageName}.generator;
 
 import com.dingxuan.atom.core.base.IDOM;
 import com.dingxuan.atom.core.base.PageInfo;
@@ -30,14 +30,14 @@ public interface I${objectName}DOM extends IDOM<${objectName}>{
          * 删除操作
          * @param: ids
          */
-        void delete(Long... ids);
+        void delete(${primaryKeyType}... ${primaryKey}s);
 
 
         /**
          * 根据主键进行查询操作
          * @param: id
          */
-        ${objectName} queryBean(Long id);
+        ${objectName} queryBean(${primaryKeyType} ${primaryKey});
 
         /**
          * 查询list操作

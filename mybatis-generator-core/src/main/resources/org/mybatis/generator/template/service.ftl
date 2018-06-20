@@ -1,4 +1,4 @@
-package ${packageName};
+package ${packageName}.generator;
 
 import com.dingxuan.atom.core.base.IService;
 import com.dingxuan.atom.${moduleName}.entity.${objectName};
@@ -28,15 +28,15 @@ public interface I${objectName}Service extends IService<${objectName}> {
 
         /**
          * 删除操作
-         * @param: ids
+         * @param: ${primaryKey}s
          */
-        void delete(Long ... ids);
+        void delete(${primaryKeyType}...  ${primaryKey}s);
 
         /**
          * 根据主键进行查询操作
          * @param: orderNbr
          */
-        ${objectName} queryBean(Long id);
+        ${objectName} queryBean(${primaryKeyType} ${primaryKey});
 
         /**
          * 查询list操作

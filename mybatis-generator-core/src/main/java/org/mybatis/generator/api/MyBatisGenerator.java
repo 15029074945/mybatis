@@ -20,8 +20,10 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaController;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaControllerExp;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaDomainInterface;
+import static org.mybatis.generator.template.GeneratorMojo.addJavaDomainInterfaceExp;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaMDaoInterface;
 import static org.mybatis.generator.template.GeneratorMojo.addJavaServiceInterface;
+import static org.mybatis.generator.template.GeneratorMojo.addJavaServiceInterfaceExp;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,6 +35,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.tools.ant.util.StringUtils;
@@ -264,22 +267,28 @@ public class MyBatisGenerator {
 
         for (Context c : configuration.getContexts()) {
             String proClassPath = this.getClass().getResource("").getPath();
+            List<JavaModuleEntity> javaModuleEntities = null;
             if (c.getJavaControllerGeneratorConfiguration() != null) {
-                List<JavaModuleEntity> javaModuleEntities = assignmentControllerTemplateEntity(c);
+                javaModuleEntities = assignmentControllerTemplateEntity(c);
                 addJavaController(javaModuleEntities);
                 addJavaControllerExp(javaModuleEntities);
             }
 
             if (c.getJavaServiceGeneratorConfiguration() != null) {
-                addJavaServiceInterface(assignmentServiceTemplateEntity(c));
+                javaModuleEntities = assignmentServiceTemplateEntity(c);
+                addJavaServiceInterface(javaModuleEntities);
+                addJavaServiceInterfaceExp(javaModuleEntities);
             }
 
             if (c.getJavaDomainGeneratorConfiguration() != null) {
-                addJavaDomainInterface(assignmentDomainTemplateEntity(c));
+                javaModuleEntities = assignmentDomainTemplateEntity(c);
+                addJavaDomainInterface(javaModuleEntities);
+                addJavaDomainInterfaceExp(javaModuleEntities);
             }
 
             if (c.getJavaMDaoGeneratorConfiguration() != null) {
-                addJavaMDaoInterface(assignmentMDaoTemplateEntity(c));
+                javaModuleEntities = assignmentMDaoTemplateEntity(c);
+                addJavaMDaoInterface(javaModuleEntities);
             }
         }
         // now save the files
@@ -323,6 +332,7 @@ public class MyBatisGenerator {
             javaModuleEntity.setPackageName(jdc.getTargetPackage());
             javaModuleEntity.setModuleName(jdc.getModuleName());
             javaModuleEntity.setFields(getFields(c, t));
+            setJavaModulePrimaryKey(javaModuleEntity, c, t);
             list.add(javaModuleEntity);
         }
         return list;
@@ -346,6 +356,7 @@ public class MyBatisGenerator {
             javaModuleEntity.setPackageName(jdc.getTargetPackage());
             javaModuleEntity.setModuleName(jdc.getModuleName());
             javaModuleEntity.setFields(getFields(c, t));
+            setJavaModulePrimaryKey(javaModuleEntity, c, t);
             list.add(javaModuleEntity);
         }
         return list;
@@ -370,6 +381,7 @@ public class MyBatisGenerator {
             javaModuleEntity.setPackageName(jdc.getTargetPackage());
             javaModuleEntity.setModuleName(jdc.getModuleName());
             javaModuleEntity.setFields(getFields(c, t));
+            setJavaModulePrimaryKey(javaModuleEntity, c, t);
             list.add(javaModuleEntity);
         }
         return list;
@@ -395,6 +407,7 @@ public class MyBatisGenerator {
             javaModuleEntity.setPackageName(jdc.getTargetPackage());
             javaModuleEntity.setModuleName(jdc.getModuleName());
             javaModuleEntity.setFields(getFields(c, t));
+            setJavaModulePrimaryKey(javaModuleEntity, c, t);
             list.add(javaModuleEntity);
         }
         return list;
@@ -429,6 +442,37 @@ public class MyBatisGenerator {
             }
         }
         return fields;
+    }
+
+    private void setJavaModulePrimaryKey(JavaModuleEntity javaModuleEntity, Context c, TableConfiguration t) {
+        List<IntrospectedTable> tables;
+        List<IntrospectedColumn> introspectedColumns = null;
+        List<IntrospectedColumn> primaryKeyColumns = null;
+        JavaTypeResolver javaTypeResolver = ObjectFactory
+                .createJavaTypeResolver(c, warnings);
+        tables = c.introspectedTables;
+        if (tables != null) {
+            for (IntrospectedTable it : tables) {
+                if (t.getTableName().equals(it.getFullyQualifiedTable().getIntrospectedTableName())) {
+                    primaryKeyColumns = it.getPrimaryKeyColumns();
+                    if (primaryKeyColumns == null) {
+                        System.out.println("此表没有主键： " + t.getTableName());
+                    }
+                    javaModuleEntity.setTableNameDesc(it.getRemarks()==null ? "" : it.getRemarks());
+                    if (null != primaryKeyColumns
+                            && !primaryKeyColumns.isEmpty()
+                            && primaryKeyColumns.size() < 2) {
+                        System.out.println("具有主键： " + t.getTableName());
+                        IntrospectedColumn in = primaryKeyColumns.get(0);
+                        javaModuleEntity.setPrimaryKey(in.getJavaProperty());
+                        String keyType = in.getFullyQualifiedJavaType().toString();
+                        keyType = keyType.substring(keyType.lastIndexOf(".")+1);
+                        System.out.println(keyType);
+                        javaModuleEntity.setPrimaryKeyType(keyType);
+                    }
+                }
+            }
+        }
     }
 
     private String getDomainObjectName(TableConfiguration t) {
@@ -485,7 +529,7 @@ public class MyBatisGenerator {
             File directory = shellCallback.getDirectory(gxf
                     .getTargetProject(), gxf.getTargetPackage());
             targetFile = new File(directory, gxf.getFileName());
-            if (targetFile.exists()) {
+           /* if (targetFile.exists()) {
                 if (gxf.isMergeable()) {
                     source = XmlFileMergerJaxp.getMergedSource(gxf,
                             targetFile);
@@ -502,8 +546,9 @@ public class MyBatisGenerator {
                 }
             } else {
                 source = gxf.getFormattedContent();
-            }
-
+            }*/
+           // 只进行覆盖操作
+            source = gxf.getFormattedContent();
             callback.checkCancel();
             callback.startTask(getString(
                     "Progress.15", targetFile.getName())); //$NON-NLS-1$
