@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: ${generatedDate} ${generatedTime}
  */
 @RestController
-@RequestMapping("/api")
-public class ${objectName}ExpResource extends BaseResource{
+public class ${objectName}ExpResource extends ${objectName}Resource{
 
     private static Logger logger=LoggerFactory.getLogger(${objectName}ExpResource.class);
 
