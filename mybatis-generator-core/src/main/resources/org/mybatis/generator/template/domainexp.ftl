@@ -1,6 +1,6 @@
 package ${packageName}.expand;
 
-import com.dingxuan.atom.system.domain.generator.I${objectName}DOM;
+import com.dingxuan.atom.${moduleName}.domain.generator.I${objectName}DOM;
 /**
  * @Description:
  * @author: mitnick

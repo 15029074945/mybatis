@@ -3,8 +3,8 @@ package ${packageName}.expand.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.dingxuan.atom.${moduleName}.dao.mdao.I${objectName}MDAO;
-import com.dingxuan.atom.system.domain.generator.impl.${objectName}DOMImpl;
-import com.dingxuan.atom.system.domain.expand.I${objectName}ExtDOM;
+import com.dingxuan.atom.${moduleName}.domain.generator.impl.${objectName}DOMImpl;
+import com.dingxuan.atom.${moduleName}.domain.expand.I${objectName}ExtDOM;
 /**
  * @Description:
  * @author: mitnick

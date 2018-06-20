@@ -1,8 +1,8 @@
 package ${packageName}.expand;
 
 import com.dingxuan.atom.core.base.BaseResource;
-import com.dingxuan.atom.system.service.expand.I${objectName}ExtService;
-import com.dingxuan.atom.system.web.generator.${objectName}Resource;
+import com.dingxuan.atom.${moduleName}.service.expand.I${objectName}ExtService;
+import com.dingxuan.atom.${moduleName}.web.generator.${objectName}Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

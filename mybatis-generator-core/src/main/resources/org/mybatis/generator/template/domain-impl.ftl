@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.dingxuan.atom.system.utils.web.EntityHelper;
 import com.dingxuan.atom.${moduleName}.dao.mdao.I${objectName}MDAO;
 /**
  * @Description:

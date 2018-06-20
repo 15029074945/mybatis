@@ -1,6 +1,6 @@
 package ${packageName}.expand;
 
-import com.dingxuan.atom.system.service.generator.I${objectName}Service;
+import com.dingxuan.atom.${moduleName}.service.generator.I${objectName}Service;
 /**
  * @Description:
  * @author: mitnick
