@@ -45,11 +45,11 @@ public class ${objectName}DOMImpl extends AbstractDOM<${objectName}> implements 
         @Override
         public ${objectName} update(${objectName} ${objectName?uncap_first}) {
 
-            ${objectName} entity = ${objectName?uncap_first}MDAO.selectByPrimaryKey(${objectName?uncap_first}.getId());
+            ${objectName} entity = ${objectName?uncap_first}MDAO.selectByPrimaryKey(${objectName?uncap_first}.get${primaryKey?cap_first}());
             updateEntity(${objectName?uncap_first});
             if(Objects.nonNull(entity)){
                 ${objectName}Example ${objectName?uncap_first}Example = new ${objectName}Example();
-                ${objectName?uncap_first}Example.createCriteria().andIdEqualTo(entity.getId());
+                ${objectName?uncap_first}Example.createCriteria().and${primaryKey?cap_first}EqualTo(entity.get${primaryKey?cap_first}());
                 ${objectName?uncap_first}MDAO.updateByExampleSelective(${objectName?uncap_first},${objectName?uncap_first}Example);
             }
             return ${objectName?uncap_first};

@@ -9,6 +9,8 @@ import com.dingxuan.atom.core.entity.CurrentUserEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.dingxuan.atom.core.utils.annotation.CurrentUser;
+import com.dingxuan.atom.core.utils.annotation.TableName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -97,7 +99,7 @@ public class ${objectName}Resource extends BaseResource {
         logger.debug("管理员【{}】根据主键批量删除数据",currentUser.getName());
         try {
             ${objectName?uncap_first}Service.delete(${primaryKey}s);
-            resultBean.setData(ids);
+            resultBean.setData(${primaryKey}s);
             responseEntity = new ResponseEntity<ResultBean>(resultBean, HttpStatus.OK);
         } catch (Exception e) {
             logger.debug("管理员【{}】根据主键批量删除数据异常",currentUser.getName());

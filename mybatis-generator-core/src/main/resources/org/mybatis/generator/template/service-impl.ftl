@@ -76,7 +76,7 @@ public class ${objectName}ServiceImpl extends AbstractService<${objectName}> imp
          */
         @Override
         public void delete(${primaryKeyType}... ${primaryKey}s) {
-             ${objectName?uncap_first}DOM.delete(ids);
+             ${objectName?uncap_first}DOM.delete(${primaryKey}s);
         }
 
 
