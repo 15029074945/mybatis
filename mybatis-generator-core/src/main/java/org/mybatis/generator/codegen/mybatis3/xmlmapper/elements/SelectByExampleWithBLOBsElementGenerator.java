@@ -68,8 +68,11 @@ public class SelectByExampleWithBLOBsElementGenerator extends
 
         sb.setLength(0);
         sb.append("from "); //$NON-NLS-1$
-        sb.append(introspectedTable
-                .getAliasedFullyQualifiedTableNameAtRuntime());
+//        sb.append(introspectedTable
+//                .getAliasedFullyQualifiedTableNameAtRuntime());
+        String aliasedName = introspectedTable
+                .getAliasedFullyQualifiedTableNameAtRuntime();
+        sb.append(aliasedName.substring(aliasedName.indexOf(".")+1));
         answer.addElement(new TextElement(sb.toString()));
         answer.addElement(getExampleIncludeElement());
 

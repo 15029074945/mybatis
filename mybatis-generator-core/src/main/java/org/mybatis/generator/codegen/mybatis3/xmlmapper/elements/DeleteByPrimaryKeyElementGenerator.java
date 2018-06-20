@@ -62,7 +62,10 @@ public class DeleteByPrimaryKeyElementGenerator extends
 
         StringBuilder sb = new StringBuilder();
         sb.append("delete from "); //$NON-NLS-1$
-        sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
+//        sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
+        String aliasedName = introspectedTable
+                .getAliasedFullyQualifiedTableNameAtRuntime();
+        sb.append(aliasedName.substring(aliasedName.indexOf(".")+1));
         answer.addElement(new TextElement(sb.toString()));
 
         boolean and = false;

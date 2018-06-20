@@ -45,8 +45,11 @@ public class CountByExampleElementGenerator extends AbstractXmlElementGenerator 
 
         StringBuilder sb = new StringBuilder();
         sb.append("select count(*) from "); //$NON-NLS-1$
-        sb.append(introspectedTable
-                .getAliasedFullyQualifiedTableNameAtRuntime());
+       /* sb.append(introspectedTable
+                .getAliasedFullyQualifiedTableNameAtRuntime());*/
+        String aliasedName = introspectedTable
+                .getAliasedFullyQualifiedTableNameAtRuntime();
+        sb.append(aliasedName.substring(aliasedName.indexOf(".")+1));
         answer.addElement(new TextElement(sb.toString()));
         answer.addElement(getExampleIncludeElement());
 
