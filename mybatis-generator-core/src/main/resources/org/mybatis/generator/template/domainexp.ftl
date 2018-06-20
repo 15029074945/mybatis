@@ -6,6 +6,6 @@ import com.dingxuan.atom.system.domain.generator.I${objectName}DOM;
  * @author: mitnick
  * @date: ${generatedDate} ${generatedTime}
  */
-public interface I${objectName}ExpDOM extends I${objectName}DOM{
+public interface I${objectName}ExtDOM extends I${objectName}DOM{
 
 }

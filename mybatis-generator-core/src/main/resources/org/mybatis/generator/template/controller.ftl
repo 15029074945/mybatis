@@ -32,6 +32,7 @@ import java.util.Objects;
  * @date: ${generatedDate} ${generatedTime}
  */
 @RestController
+@RequestMapping("/api/${moduleName}")
 public class ${objectName}Resource extends BaseResource {
 
     private static Logger logger = LoggerFactory.getLogger(${objectName}Resource.class);
@@ -40,7 +41,7 @@ public class ${objectName}Resource extends BaseResource {
     @Qualifier("${objectName?uncap_first}Service")
     private I${objectName}Service ${objectName?uncap_first}Service;
 
-    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}",
+    @RequestMapping(value = "/${objectName?uncap_first}",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> insert(@RequestBody ${objectName} ${objectName?uncap_first},
@@ -64,7 +65,7 @@ public class ${objectName}Resource extends BaseResource {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}",
+    @RequestMapping(value = "/${objectName?uncap_first}",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> update(@RequestBody ${objectName} ${objectName?uncap_first},
@@ -88,7 +89,7 @@ public class ${objectName}Resource extends BaseResource {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}",
+    @RequestMapping(value = "/${objectName?uncap_first}",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> delete(@CurrentUser  CurrentUserEntity currentUser,
@@ -112,7 +113,7 @@ public class ${objectName}Resource extends BaseResource {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}",
+    @RequestMapping(value = "/${objectName?uncap_first}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> queryBean(@CurrentUser CurrentUserEntity currentUser,
@@ -136,7 +137,7 @@ public class ${objectName}Resource extends BaseResource {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}/list",
+    @RequestMapping(value = "/${objectName?uncap_first}/list",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> queryList(@CurrentUser  CurrentUserEntity currentUser,
@@ -160,7 +161,7 @@ public class ${objectName}Resource extends BaseResource {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/${moduleName}/${objectName?uncap_first}/page",
+    @RequestMapping(value = "/${objectName?uncap_first}/page",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultBean> queryPage(@CurrentUser CurrentUserEntity currentUser,

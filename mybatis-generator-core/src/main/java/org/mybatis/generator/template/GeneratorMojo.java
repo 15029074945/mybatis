@@ -102,7 +102,7 @@ public class GeneratorMojo {
                         filePath = filePath.append("generator").append(File.separator).append(javaModuleEntity.getObjectName()).append("Resource.java");
                     } else if("controllerexp".equals(template)){
                         flag = true;
-                        filePath = filePath.append("expand").append(File.separator).append(javaModuleEntity.getObjectName()).append("ExpResource.java");
+                        filePath = filePath.append("expand").append(File.separator).append(javaModuleEntity.getObjectName()).append("ExtResource.java");
                     }else if ("service".equals(template)) {
                         flag = true;
                         filePath = filePath.append("generator").append(File.separator).append("I").append(javaModuleEntity.getObjectName()).append("Service.java");
@@ -117,16 +117,16 @@ public class GeneratorMojo {
                         filePath = filePath.append("generator").append(File.separator).append("impl").append(File.separator).append(javaModuleEntity.getObjectName()).append("DOMImpl.java");
                     }else if ("serviceexp".equals(template)) {
                         flag = true;
-                        filePath = filePath.append("expand").append(File.separator).append("I").append(javaModuleEntity.getObjectName()).append("ExpService.java");
+                        filePath = filePath.append("expand").append(File.separator).append("I").append(javaModuleEntity.getObjectName()).append("ExtService.java");
                     } else if ("service-implexp".equals(template)) {
                         flag = true;
-                        filePath = filePath.append("expand").append(File.separator).append("impl").append(File.separator).append(javaModuleEntity.getObjectName()).append("ExpServiceImpl.java");
+                        filePath = filePath.append("expand").append(File.separator).append("impl").append(File.separator).append(javaModuleEntity.getObjectName()).append("ExtServiceImpl.java");
                     }else if ("domainexp".equals(template)) {
                         flag = true;
-                        filePath = filePath.append("expand").append(File.separator).append("I").append(javaModuleEntity.getObjectName()).append("ExpDOM.java");
+                        filePath = filePath.append("expand").append(File.separator).append("I").append(javaModuleEntity.getObjectName()).append("ExtDOM.java");
                     }else if ("domain-implexp".equals(template)) {
                         flag = true;
-                        filePath = filePath.append("expand").append(File.separator).append("impl").append(File.separator).append(javaModuleEntity.getObjectName()).append("ExpDOMImpl.java");
+                        filePath = filePath.append("expand").append(File.separator).append("impl").append(File.separator).append(javaModuleEntity.getObjectName()).append("ExtDOMImpl.java");
                     }else if ("mdao".equals(template)) {
                         flag = true;
                         filePath = filePath.append("I").append(javaModuleEntity.getObjectName()).append("MDAO.java");

@@ -7,6 +7,6 @@ import com.dingxuan.atom.system.service.generator.I${objectName}Service;
  * @date: ${generatedDate} ${generatedTime}
  */
 
-public interface I${objectName}ExpService extends I${objectName}Service {
+public interface I${objectName}ExtService extends I${objectName}Service {
 
 }
